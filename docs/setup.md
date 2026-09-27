@@ -13,8 +13,8 @@ Guide d'installation de l'environnement de développement de BasketDB Factory so
 
 | Service | Port | Raison |
 |---|---|---|
-| PostgreSQL (WSL2) | 5433 | 
-| Airflow api-server | 8081 |
+| PostgreSQL (WSL2) | 5433 | 5432 occupé par le PostgreSQL Windows de HCP |
+| Airflow api-server | 8081 | 8080 occupé par un composant EDB côté Windows |
 
 ## PostgreSQL
 
