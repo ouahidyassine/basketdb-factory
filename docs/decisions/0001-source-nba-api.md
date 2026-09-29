@@ -28,7 +28,7 @@ Utiliser la bibliothèque `nba_api` et l'endpoint `LeagueGameLog`, qui renvoie u
 
 - Grain vérifié : `(GAME_ID, TEAM_ID)` unique avec exactement 2 lignes par match ; `(GAME_ID, PLAYER_ID)` unique.
 - Aucun blocage sur 6 appels espacés de 2 s.
-- Versions testées : Python 3.12, nba_api …, pandas …, requests ….
+- Versions testées : Python 3.12, nba_api  1.11.4, pandas 3.0.6, requests 2.34.2.
 
 ## Conséquences
 
