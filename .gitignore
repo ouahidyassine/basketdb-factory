@@ -16,3 +16,6 @@ dbt/dbt_packages/
 # Logs
 logs/
 *.log
+
+# Éditeur
+.vscode/
