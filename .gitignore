@@ -7,9 +7,9 @@ __pycache__/
 .venv*/
 .pytest_cache/
 .ruff_cache/
- *.egg-info/
-   build/
-   dist/
+*.egg-info/
+build/
+dist/
 
 # dbt
 dbt/target/
