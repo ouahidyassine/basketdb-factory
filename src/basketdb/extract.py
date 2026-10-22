@@ -66,8 +66,8 @@ def with_retries(
                 raise
             delay = delays[attempt - 1]
             logger.warning(
-                "Tentative %d/%d échouée (%r) ; nouvel essai dans %.0f s",
-                attempt, max_attempts, exc, delay,
+                "Tentative %d/%d échouée (%s) ; nouvel essai dans %.0f s",
+                attempt, max_attempts, type(exc).__name__, delay,
             )
             sleep(delay)
 
