@@ -1,5 +1,6 @@
 """Libellés de saisons NBA (« 2015-16 ») : validation et génération de plages."""
 import re
+from datetime import date
 
 _SEASON_PATTERN = re.compile(r"(\d{4})-(\d{2})")
 
@@ -36,4 +37,14 @@ def season_range(first: str, last: str) -> list[str]:
     if start > end:
         raise SeasonError(f"Plage inversée : {first} est après {last}")
     return [season_label(year) for year in range(start, end + 1)]
-    
+
+
+def season_for_date(day: date) -> str:
+    """Saison NBA à laquelle appartient une date.
+
+    Une saison commence en octobre. Une date d'octobre à décembre appartient à la
+    saison qui démarre cette année-là ; une date de janvier à septembre, à la saison
+    commencée l'automne précédent (intersaison comprise).
+    """
+    start = day.year if day.month >= 10 else day.year - 1
+    return season_label(start)

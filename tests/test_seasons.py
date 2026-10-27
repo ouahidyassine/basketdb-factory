@@ -1,7 +1,9 @@
 """Tests des libellés et des plages de saisons."""
+from datetime import date
+
 import pytest
 
-from basketdb.seasons import SeasonError, parse_season, season_label, season_range
+from basketdb.seasons import SeasonError, parse_season, season_for_date, season_label, season_range
 
 
 @pytest.mark.parametrize(
@@ -37,3 +39,18 @@ def test_single_season_range() -> None:
 def test_reversed_range_is_rejected() -> None:
     with pytest.raises(SeasonError, match="inversée"):
         season_range("2025-26", "2015-16")
+
+
+@pytest.mark.parametrize(
+    ("day", "season"),
+    [
+        (date(2026, 1, 15), "2025-26"),
+        (date(2026, 6, 20), "2025-26"),
+        (date(2026, 9, 30), "2025-26"),
+        (date(2026, 10, 1), "2026-27"),
+        (date(1999, 12, 25), "1999-00"),
+    ],
+    ids=["en-saison", "intersaison", "veille-bascule", "bascule", "passage-siecle"],
+)
+def test_season_for_date(day: date, season: str) -> None:
+    assert season_for_date(day) == season

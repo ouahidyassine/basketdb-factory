@@ -25,7 +25,7 @@ class Settings:
     postgres_port: int
     postgres_db: str
     postgres_user: str
-    postgres_password: str = field(repr=False) 
+    postgres_password: str = field(repr=False)
     def connection_kwargs(self) -> dict[str, str | int]:
         """Arguments nommés attendus par psycopg.connect()."""
         return {

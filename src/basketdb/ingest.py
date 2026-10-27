@@ -1,16 +1,17 @@
-"""Point d'entrée de l'ingestion : charge une plage de saisons dans la couche Bronze."""
+"""Point d'entrée de l'ingestion : charge des saisons NBA dans la couche Bronze."""
 import argparse
 import logging
 import time
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
+from datetime import date
 
 from basketdb.config import load_settings
 from basketdb.db import connect, ensure_bronze_schema
 from basketdb.extract import SOURCE, extract_season
 from basketdb.levels import Level
 from basketdb.load import load_season, to_records
-from basketdb.seasons import SeasonError, parse_season, season_range
+from basketdb.seasons import SeasonError, parse_season, season_for_date, season_range
 
 logger = logging.getLogger(__name__)
 
@@ -42,19 +43,33 @@ def season_arg(value: str) -> str:
     return value
 
 
+def date_arg(value: str) -> date:
+    """Type argparse : accepte une date au format AAAA-MM-JJ, sinon erreur d'usage."""
+    try:
+        return date.fromisoformat(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            f"Date invalide : {value!r} (attendu : AAAA-MM-JJ)"
+        ) from exc
+
+
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
-    """Lit et valide les arguments de la ligne de commande."""
+    """Lit et valide les arguments : soit --date, soit --from et --to."""
     parser = argparse.ArgumentParser(
         prog="basketdb-ingest",
-        description="Charge les journaux de matchs NBA d'une plage de saisons dans Bronze.",
+        description="Charge les journaux de matchs NBA dans Bronze, par plage ou par date.",
     )
     parser.add_argument(
-        "--from", dest="first", required=True, type=season_arg,
+        "--from", dest="first", type=season_arg,
         help="première saison, par exemple 2015-16",
     )
     parser.add_argument(
-        "--to", dest="last", required=True, type=season_arg,
+        "--to", dest="last", type=season_arg,
         help="dernière saison incluse, par exemple 2025-26",
+    )
+    parser.add_argument(
+        "--date", type=date_arg,
+        help="date du run (AAAA-MM-JJ) : charge la saison à laquelle elle appartient",
     )
     parser.add_argument(
         "--levels", nargs="+", choices=list(LEVEL_CHOICES), default=list(LEVEL_CHOICES),
@@ -67,7 +82,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--log-level", default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"],
     )
-    return parser.parse_args(argv)
+
+    args = parser.parse_args(argv)
+    if args.date is not None and (args.first or args.last):
+        parser.error("--date ne se combine pas avec --from et --to")
+    if args.date is None and not (args.first and args.last):
+        parser.error("indiquer soit --date, soit --from et --to")
+    return args
 
 
 def run(
@@ -119,11 +140,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         format="%(asctime)s %(levelname)s %(name)s %(message)s",
     )
 
-    try:
-        seasons = season_range(args.first, args.last)
-    except SeasonError as exc:
-        logger.error("%s", exc)
-        return 2
+    if args.date is not None:
+        seasons = [season_for_date(args.date)]
+    else:
+        try:
+            seasons = season_range(args.first, args.last)
+        except SeasonError as exc:
+            logger.error("%s", exc)
+            return 2
 
     levels = [LEVEL_CHOICES[name] for name in args.levels]
     logger.info(
