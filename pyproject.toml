@@ -37,7 +37,7 @@ target-version = "py312"
 extend-exclude = ["spikes"]  # code jetable, hors du périmètre qualité
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+select = ["E", "F", "I", "UP", "B", "W"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -53,4 +53,4 @@ def test_reversed_range_is_rejected() -> None:
     ids=["en-saison", "intersaison", "veille-bascule", "bascule", "passage-siecle"],
 )
 def test_season_for_date(day: date, season: str) -> None:
-    assert season_for_date(day) == season        
+    assert season_for_date(day) == season

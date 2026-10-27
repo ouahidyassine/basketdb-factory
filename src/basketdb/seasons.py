@@ -37,7 +37,7 @@ def season_range(first: str, last: str) -> list[str]:
     if start > end:
         raise SeasonError(f"Plage inversée : {first} est après {last}")
     return [season_label(year) for year in range(start, end + 1)]
-    
+
 
 def season_for_date(day: date) -> str:
     """Saison NBA à laquelle appartient une date.
