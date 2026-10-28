@@ -1,8 +1,9 @@
 """Tests des contrôles de qualité de Bronze."""
 import psycopg
 import pytest
-from basketdb.checks import CheckResult, failed_checks, run_checks
 from psycopg.types.json import Jsonb
+
+from basketdb.checks import CheckResult, failed_checks, run_checks
 
 
 def test_check_without_violation_is_ok() -> None:
