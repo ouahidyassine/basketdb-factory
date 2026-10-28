@@ -24,12 +24,13 @@ dev = [
 
 [project.scripts]
 basketdb-ingest = "basketdb.ingest:main"
+basketdb-check = "basketdb.checks:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-basketdb = ["sql/bronze/*.sql"]
+basketdb = ["sql/bronze/*.sql", "sql/checks/*.sql"]
 
 [tool.ruff]
 line-length = 100

@@ -7,6 +7,7 @@ from airflow.sdk import DAG
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 INGEST_BIN = PROJECT_DIR / ".venv" / "bin" / "basketdb-ingest"
+CHECK_BIN = PROJECT_DIR / ".venv" / "bin" / "basketdb-check"
 
 
 def ingest_command(level: str) -> str:
@@ -43,5 +44,11 @@ with DAG(
         bash_command=ingest_command("player"),
         cwd=str(PROJECT_DIR),
     )
+    check_bronze_quality = BashOperator(
+        task_id="check_bronze_quality",
+        bash_command=str(CHECK_BIN),
+        cwd=str(PROJECT_DIR),
+        retries=0,
+    )
 
-    ingest_team >> ingest_player
+    ingest_team >> ingest_player >> check_bronze_quality

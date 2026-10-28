@@ -1,6 +1,6 @@
 -- Contrôles de qualité de la couche Bronze.
 -- Chaque contrôle compte des violations : 0 partout signifie que la couche est saine.
--- Exécution : psql -h localhost -p 5433 -U basketdb_user -d basketdb -f sql/checks/bronze_quality.sql
+-- Exécution : psql -h localhost -p 5433 -U basketdb_user -d basketdb -f src/basketdb/sql/checks/bronze_quality.sql
 
 WITH team AS (
     SELECT
