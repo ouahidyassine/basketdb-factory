@@ -29,7 +29,7 @@ basketdb-ingest = "basketdb.ingest:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-basketdb = ["sql/bronze/*.sql"]
+basketdb = ["sql/bronze/*.sql", "sql/checks/*.sql"]
 
 [tool.ruff]
 line-length = 100

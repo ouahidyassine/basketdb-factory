@@ -12,14 +12,15 @@ Pipeline ELT de données NBA : ingestion robuste depuis stats.nba.com, entrepôt
 
 ```mermaid
 flowchart LR
+    G[Airflow<br/>nba_daily_ingest] -->|chaque jour<br/>à 10 h UTC| B
     A[stats.nba.com<br/>via nba_api] -->|extraction avec reprises<br/>et contrat de schéma| B[basketdb-ingest]
     B -->|COPY idempotent<br/>par saison| C[(PostgreSQL<br/>bronze)]
     C -.->|dbt · phase 3| D[(silver)]
     D -.->|dbt · phase 3| E[(gold)]
-    E -.->|phase 5| F[Power BI]
+    E -.->|phase 4| F[Power BI]
 ```
 
-Traits pleins : construit. Pointillés : à venir. Airflow orchestrera l'ensemble à partir de la phase 2.
+Traits pleins : construit. Pointillés : à venir. Chaque jour, le DAG `nba_daily_ingest` recharge la saison en cours aux niveaux équipe et joueur.
 
 ## Avancement
 
@@ -47,15 +48,21 @@ basketdb-ingest --from 2015-16 --to 2025-26
 
 Le backfill complet prend environ 1 min 30. Il est idempotent : le relancer remplace chaque saison à l'identique, sans doublon.
 
+Pour charger la saison d'une date précise, comme le fait le DAG :
+
+```bash
+basketdb-ingest --date 2026-01-15
+```
+
 ## Qualité
 
-- **52 tests** (`pytest`) : 48 tests unitaires, sans réseau ni base, et 4 tests d'intégration contre PostgreSQL, exécutés dans une transaction annulée.
+- **61 tests** (`pytest`) : 57 tests unitaires, sans réseau ni base, et 4 tests d'intégration contre PostgreSQL, exécutés dans une transaction annulée.
 - **CI GitHub Actions** : `ruff` et `pytest` sur chaque pull request ; `main` est protégée, aucune fusion n'est possible sans CI verte.
 - **7 contrôles de qualité des données** sur Bronze : grain, cardinalité, cohérence métier, intégrité référentielle, complétude.
 
 ```bash
 pytest
-psql -h localhost -p 5433 -U basketdb_user -d basketdb -f sql/checks/bronze_quality.sql
+psql -h localhost -p 5433 -U basketdb_user -d basketdb -f src/basketdb/sql/checks/bronze_quality.sql
 ```
 
 ## Structure du dépôt
@@ -63,9 +70,9 @@ psql -h localhost -p 5433 -U basketdb_user -d basketdb -f sql/checks/bronze_qual
 ```
 basketdb-factory/
 ├── src/basketdb/          # package : configuration, extraction, contrat, chargement, CLI
-│   └── sql/bronze/        # DDL de la couche Bronze, embarqué dans le package
+│   └── sql/               # SQL exécuté par le code : DDL Bronze, contrôles de qualité
+├── dags/                  # DAG Airflow : ingestion quotidienne
 ├── tests/                 # tests unitaires et d'intégration
-├── sql/checks/            # contrôles de qualité des données
 ├── sql/exploration/       # requêtes de profilage
 ├── docs/                  # installation, décisions d'architecture, documentation des données
 ├── spikes/                # test de faisabilité de la source

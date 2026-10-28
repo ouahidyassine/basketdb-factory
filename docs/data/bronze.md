@@ -31,7 +31,7 @@ Colonnes communes : `season` (clé de partition, format `AAAA-AA`), `payload`, `
 
 ## Contrôles de qualité
 
-`sql/checks/bronze_quality.sql` : 7 contrôles, **0 violation** au 22 octobre 2026.
+`src/basketdb/sql/checks/bronze_quality.sql` : 7 contrôles, **0 violation** au 22 octobre 2026.
 
 - Aucun doublon sur les clés des deux grains.
 - Exactement 2 lignes équipe et 1 victoire par match ; le vainqueur a toujours plus de points.
