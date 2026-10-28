@@ -56,13 +56,13 @@ basketdb-ingest --date 2026-01-15
 
 ## Qualité
 
-- **61 tests** (`pytest`) : 57 tests unitaires, sans réseau ni base, et 4 tests d'intégration contre PostgreSQL, exécutés dans une transaction annulée.
+- **65 tests** (`pytest`) : 59 tests unitaires, sans réseau ni base, et 6 tests d'intégration contre PostgreSQL, exécutés dans une transaction annulée.
 - **CI GitHub Actions** : `ruff` et `pytest` sur chaque pull request ; `main` est protégée, aucune fusion n'est possible sans CI verte.
-- **7 contrôles de qualité des données** sur Bronze : grain, cardinalité, cohérence métier, intégrité référentielle, complétude.
+- **7 contrôles de qualité des données** sur Bronze (grain, cardinalité, cohérence métier, intégrité référentielle, complétude), exécutés par `basketdb-check` à la fin de chaque run du DAG : une violation fait échouer le run.
 
 ```bash
 pytest
-psql -h localhost -p 5433 -U basketdb_user -d basketdb -f src/basketdb/sql/checks/bronze_quality.sql
+basketdb-check
 ```
 
 ## Structure du dépôt
