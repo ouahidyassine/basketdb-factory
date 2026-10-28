@@ -24,6 +24,7 @@ dev = [
 
 [project.scripts]
 basketdb-ingest = "basketdb.ingest:main"
+basketdb-check = "basketdb.checks:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
