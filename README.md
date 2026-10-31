@@ -28,7 +28,7 @@ Traits pleins : construit. Pointillés : à venir. Chaque jour, le DAG `nba_dail
 |---|---|---|
 | 0 | Environnement local, validation de la source | ✅ `v0.1.0` |
 | 1 | Ingestion Bronze : 11 saisons, 307 581 lignes | ✅ `v0.2.0` |
-| 2 | Orchestration Airflow | En cours |
+| 2 | Orchestration Airflow : DAG quotidien, porte de qualité | ✅ `v0.3.0` |
 | 3 | Modélisation dbt (Silver, Gold), tests et lineage | À venir |
 | 4 | Dashboard Power BI | À venir |
 
@@ -52,6 +52,15 @@ Pour charger la saison d'une date précise, comme le fait le DAG :
 
 ```bash
 basketdb-ingest --date 2026-01-15
+```
+## Orchestration
+
+Le DAG `nba_daily_ingest` enchaîne chaque jour à 10 h UTC `ingest_team`, `ingest_player` et `check_bronze_quality` : il recharge la saison en cours, puis fait échouer le run si un contrôle de qualité trouve une violation. Prérequis : Airflow 3.3.2 dans son propre venv, avec `AIRFLOW__CORE__DAGS_FOLDER` pointant vers le dossier `dags/` du dépôt (voir [docs/setup.md](docs/setup.md)).
+
+```bash
+source ~/venvs/airflow/bin/activate
+airflow standalone                        # interface web sur le port configuré
+airflow dags unpause nba_daily_ingest     # dans un second terminal
 ```
 
 ## Qualité
@@ -85,3 +94,4 @@ basketdb-factory/
 - [Couche Bronze : tables, volumes, contrôles, couverture des données](docs/data/bronze.md)
 - [ADR 0001 : choix de la source de données](docs/decisions/0001-source-nba-api.md)
 - [ADR 0002 : stratégie de chargement de Bronze](docs/decisions/0002-bronze-loading-strategy.md)
+- [ADR 0003 : orchestration de l'ingestion avec Airflow](docs/decisions/0003-orchestration-strategy.md)
