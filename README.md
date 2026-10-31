@@ -56,8 +56,8 @@ basketdb-ingest --date 2026-01-15
 
 ## Qualité
 
-- **65 tests** (`pytest`) : 59 tests unitaires, sans réseau ni base, et 6 tests d'intégration contre PostgreSQL, exécutés dans une transaction annulée.
-- **CI GitHub Actions** : `ruff` et `pytest` sur chaque pull request ; `main` est protégée, aucune fusion n'est possible sans CI verte.
+- **70 tests** (`pytest`) : 59 tests unitaires et 6 tests d'intégration du code (PostgreSQL, transaction annulée), et 5 tests du DAG Airflow (import, tâches, ordre, planification, reprises).
+- **CI GitHub Actions** : deux jobs en parallèle sur chaque pull request, `ruff` et `pytest` dans l'environnement du projet, puis l'import et la structure du DAG dans un environnement Airflow isolé. `main` est protégée : aucune fusion sans les deux checks verts.
 - **7 contrôles de qualité des données** sur Bronze (grain, cardinalité, cohérence métier, intégrité référentielle, complétude), exécutés par `basketdb-check` à la fin de chaque run du DAG : une violation fait échouer le run.
 
 ```bash
