@@ -64,6 +64,9 @@ jobs:
           pip install "apache-airflow==${AIRFLOW_VERSION}" pytest \
             --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 
+      - name: Vérifier l'import d'Airflow
+        run: python -c "import airflow; print(airflow.__version__)"
+
       - name: Tester le DAG
         run: python -m pytest tests/dags --noconftest -q
 
