@@ -16,7 +16,7 @@ concurrency:
 jobs:
   lint-and-test:
     name: Lint et tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     steps:
@@ -40,3 +40,34 @@ jobs:
 
       - name: Tests (pytest)
         run: pytest -v
+
+  dag-import:
+    name: Import du DAG
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      AIRFLOW_VERSION: "3.3.2"
+      PYTHON_VERSION: "3.12"
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v6
+
+      - name: Installer Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: .github/workflows/ci.yml
+
+      - name: Installer Airflow et pytest
+        run: |
+          pip install "apache-airflow==${AIRFLOW_VERSION}" pytest \
+            --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+
+      - name: Vérifier l'import d'Airflow
+        run: python -c "import airflow; print(airflow.__version__)"
+
+      - name: Tester le DAG
+        run: python -m pytest tests/dags --noconftest -q
+
+
