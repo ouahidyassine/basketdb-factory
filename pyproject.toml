@@ -19,7 +19,11 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=8",
-    "ruff>=0.6",
+    "ruff==0.16.10",
+]
+dbt = [
+       "dbt-core>=1.12,<1.13",
+       "dbt-postgres>=1.11,<1.12",
 ]
 
 [project.scripts]
