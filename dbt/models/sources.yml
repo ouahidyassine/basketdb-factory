@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: >
+      Journaux de matchs NBA bruts, chargés par basketdb-ingest depuis stats.nba.com :
+      une ligne de la source par ligne de table, dans une colonne payload en JSONB.
+    schema: bronze
+    loaded_at_field: _loaded_at
+    freshness:
+      warn_after: {count: 36, period: hour}
+      error_after: {count: 72, period: hour}
+    tables:
+      - name: team_game_log
+        description: Une ligne par équipe et par match (grain GAME_ID, TEAM_ID).
+        columns:
+          - name: season
+            description: Saison au format 2015-16 ; chaque chargement remplace une saison entière.
+          - name: payload
+            description: Ligne brute de LeagueGameLog au niveau équipe.
+          - name: _loaded_at
+            description: Horodatage du chargement de la ligne.
+      - name: player_game_log
+        description: >
+          Une ligne par joueur entré en jeu et par match (grain GAME_ID, PLAYER_ID).
+          Les joueurs absents n'y figurent pas.
+        columns:
+          - name: season
+            description: Saison au format 2015-16 ; chaque chargement remplace une saison entière.
+          - name: payload
+            description: Ligne brute de LeagueGameLog au niveau joueur.
+          - name: _loaded_at
+            description: Horodatage du chargement de la ligne.
