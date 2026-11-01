@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_player_games
+    description: >
+      Journal des matchs au niveau joueur, typé et renommé : une ligne par joueur
+      entré en jeu et par match. Les joueurs absents n'y figurent pas.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [game_id, player_id]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(fga = 0) = (fg_pct is null)"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(fg3a = 0) = (fg3_pct is null)"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(fta = 0) = (ft_pct is null)"
+    columns:
+      - name: game_id
+        description: Identifiant du match, en texte pour conserver ses zéros initiaux.
+        data_tests: [not_null]
+      - name: player_id
+        description: Identifiant du joueur.
+        data_tests: [not_null]
+      - name: team_id
+        description: Identifiant de l'équipe du joueur pour ce match.
+        data_tests: [not_null]
+      - name: game_date
+        description: Date du match.
+        data_tests: [not_null]
+      - name: minutes
+        description: Minutes jouées, arrondies à la minute ; 0 pour une entrée de moins d'une minute.
+        data_tests: [not_null]
+      - name: fg_pct
+        description: Réussite aux tirs ; null si aucun tir tenté (0 sur 0 n'est pas 0 %).
