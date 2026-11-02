@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: int_team_games_enriched
+    description: >
+      Une ligne par équipe et par match, avec les variables connues avant le coup d'envoi :
+      repos, back-to-back, forme sur les 10 matchs précédents, et les mêmes variables pour
+      l'adversaire. Aucune variable n'utilise le résultat du match courant.
+    data_tests:
+      - dbt_utils.equal_rowcount:
+          arguments:
+            compare_model: ref('int_team_games_paired')
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [game_id, team_id]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(game_number = 1) = (previous_game_date is null)"
+    columns:
+      - name: game_number
+        description: Rang du match dans la saison de l'équipe, à partir de 1.
+        data_tests: [not_null]
+      - name: rest_days
+        description: Jours de repos depuis le match précédent ; null pour le premier match de la saison.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+      - name: win_rate_last_10
+        description: >
+          Taux de victoire sur les 10 matchs précédents au plus, sans le match courant ;
+          null pour le premier match de la saison.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1
+      - name: form_games
+        description: Nombre de matchs réellement pris en compte dans win_rate_last_10 (0 à 10).
+        data_tests: [not_null]
