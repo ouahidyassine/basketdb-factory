@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: int_team_games_paired
+    description: >
+      Une ligne par équipe et par match, associée à son adversaire. Les matchs sur terrain
+      neutre sont ceux qu'aucune des deux équipes ne reçoit (10 matchs signalés par la source
+      depuis 2024-25) et ceux de la bulle de 2019-20, à partir du 30 juillet 2020. Les matchs
+      délocalisés plus anciens ne sont pas détectables : la source leur attribuait une équipe
+      à domicile.
+    data_tests:
+      - dbt_utils.equal_rowcount:
+          arguments:
+            compare_model: ref('stg_team_games')
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [game_id, team_id]
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "point_diff = plus_minus"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "is_win = (point_diff > 0)"
+    columns:
+      - name: opponent_team_id
+        description: Identifiant de l'adversaire.
+        data_tests: [not_null]
+      - name: point_diff
+        description: Écart de points final, du point de vue de l'équipe.
+        data_tests: [not_null]
+      - name: is_neutral_site
+        description: Vrai si le match s'est joué sur terrain neutre.
+        data_tests: [not_null]
