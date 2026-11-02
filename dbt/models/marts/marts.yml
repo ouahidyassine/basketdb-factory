@@ -39,3 +39,51 @@ models:
       - name: season
         description: Saison à laquelle appartient le jour, au format 2015-16.
         data_tests: [not_null]
+
+  - name: fact_team_game
+    description: >
+      Une ligne par équipe et par match : résultat, points, et variables connues avant
+      le coup d'envoi (lieu, repos, back-to-back, forme), pour l'équipe et son adversaire.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [game_id, team_id]
+      - dbt_utils.equal_rowcount:
+          arguments:
+            compare_model: ref('int_team_games_enriched')
+    columns:
+      - name: team_id
+        description: Équipe de la ligne ; relation active vers dim_team.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: team_id
+      - name: opponent_team_id
+        description: Adversaire ; seconde relation vers dim_team, à rendre inactive dans Power BI.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: team_id
+      - name: game_date
+        description: Date du match ; relation vers dim_date.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: season
+        description: Saison du match ; relation vers dim_season.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_season')
+                field: season
+      - name: is_win
+        description: Vrai si l'équipe a gagné le match.
+        data_tests: [not_null]
