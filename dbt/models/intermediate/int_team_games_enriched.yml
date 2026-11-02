@@ -38,3 +38,6 @@ models:
       - name: form_games
         description: Nombre de matchs réellement pris en compte dans win_rate_last_10 (0 à 10).
         data_tests: [not_null]
+      - name: is_back_to_back
+        description: Vrai si l'équipe jouait la veille ; faux pour le premier match de la saison.
+        data_tests: [not_null]

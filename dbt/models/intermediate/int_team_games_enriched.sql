@@ -36,7 +36,7 @@ with_opponent as (
 
     select
         t.*,
-        t.rest_days = 0                              as is_back_to_back,
+        coalesce(t.rest_days = 0, false)             as is_back_to_back,
         o.rest_days                                  as opponent_rest_days,
         t.rest_days - o.rest_days                    as rest_advantage,
         o.win_rate_last_10                           as opponent_win_rate_last_10
