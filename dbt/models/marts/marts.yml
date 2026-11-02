@@ -26,3 +26,16 @@ models:
       - name: team_abbreviation
         description: Dernière abréviation connue.
         data_tests: [unique, not_null]
+
+  - name: dim_date
+    description: >
+      Une ligne par jour, du 1er octobre 2015 au 30 juin 2027, avec la saison de chaque jour.
+      À prolonger avant la saison 2027-28 : le test de relation entre fact_team_game et dim_date
+      échouera dès qu'un match sortira de cette plage.
+    columns:
+      - name: date_day
+        description: Le jour ; clé de la dimension.
+        data_tests: [unique, not_null]
+      - name: season
+        description: Saison à laquelle appartient le jour, au format 2015-16.
+        data_tests: [not_null]
