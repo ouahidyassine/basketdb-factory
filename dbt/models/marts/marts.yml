@@ -1,0 +1,89 @@
+version: 2
+
+seeds:
+  - name: season_notes
+    description: Saisons particulières, avec leur contexte, écrit à la main.
+
+models:
+  - name: dim_season
+    description: >
+      Une ligne par saison. is_complete vaut faux pour la saison en cours ;
+      is_shortened signale les saisons interrompues ou raccourcies (2019-20, 2020-21).
+    columns:
+      - name: season
+        description: Saison au format 2015-16 ; clé de la dimension.
+        data_tests: [unique, not_null]
+      - name: is_complete
+        description: Vrai si la saison régulière est terminée.
+        data_tests: [not_null]
+
+  - name: dim_team
+    description: Une ligne par équipe, avec son dernier nom et sa dernière abréviation connus.
+    columns:
+      - name: team_id
+        description: Identifiant de l'équipe ; clé de la dimension.
+        data_tests: [unique, not_null]
+      - name: team_abbreviation
+        description: Dernière abréviation connue.
+        data_tests: [unique, not_null]
+
+  - name: dim_date
+    description: >
+      Une ligne par jour, du 1er octobre 2015 au 30 juin 2027, avec la saison de chaque jour.
+      À prolonger avant la saison 2027-28 : le test de relation entre fact_team_game et dim_date
+      échouera dès qu'un match sortira de cette plage.
+    columns:
+      - name: date_day
+        description: Le jour ; clé de la dimension.
+        data_tests: [unique, not_null]
+      - name: season
+        description: Saison à laquelle appartient le jour, au format 2015-16.
+        data_tests: [not_null]
+
+  - name: fact_team_game
+    description: >
+      Une ligne par équipe et par match : résultat, points, et variables connues avant
+      le coup d'envoi (lieu, repos, back-to-back, forme), pour l'équipe et son adversaire.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [game_id, team_id]
+      - dbt_utils.equal_rowcount:
+          arguments:
+            compare_model: ref('int_team_games_enriched')
+    columns:
+      - name: team_id
+        description: Équipe de la ligne ; relation active vers dim_team.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: team_id
+      - name: opponent_team_id
+        description: Adversaire ; seconde relation vers dim_team, à rendre inactive dans Power BI.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: team_id
+      - name: game_date
+        description: Date du match ; relation vers dim_date.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: season
+        description: Saison du match ; relation vers dim_season.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_season')
+                field: season
+      - name: is_win
+        description: Vrai si l'équipe a gagné le match.
+        data_tests: [not_null]
