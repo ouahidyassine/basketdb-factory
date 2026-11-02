@@ -1,0 +1,17 @@
+version: 2
+
+exposures:
+  - name: nba_pregame_dashboard
+    label: Dashboard NBA d'avant-match
+    type: dashboard
+    maturity: low
+    description: >
+      Dashboard Power BI de la phase 4 : peut-on expliquer le résultat d'un match
+      avant qu'il soit joué ? Il lit uniquement le schéma gold.
+    depends_on:
+      - ref('fact_team_game')
+      - ref('dim_team')
+      - ref('dim_date')
+      - ref('dim_season')
+    owner:
+      name: Ouahid Yassine
