@@ -19,3 +19,7 @@ models:
     marts:
       +schema: gold
       +materialized: table
+
+seeds:
+  basketdb:
+    +schema: silver

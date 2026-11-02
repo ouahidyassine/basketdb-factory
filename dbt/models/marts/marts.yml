@@ -1,0 +1,28 @@
+version: 2
+
+seeds:
+  - name: season_notes
+    description: Saisons particulières, avec leur contexte, écrit à la main.
+
+models:
+  - name: dim_season
+    description: >
+      Une ligne par saison. is_complete vaut faux pour la saison en cours ;
+      is_shortened signale les saisons interrompues ou raccourcies (2019-20, 2020-21).
+    columns:
+      - name: season
+        description: Saison au format 2015-16 ; clé de la dimension.
+        data_tests: [unique, not_null]
+      - name: is_complete
+        description: Vrai si la saison régulière est terminée.
+        data_tests: [not_null]
+
+  - name: dim_team
+    description: Une ligne par équipe, avec son dernier nom et sa dernière abréviation connus.
+    columns:
+      - name: team_id
+        description: Identifiant de l'équipe ; clé de la dimension.
+        data_tests: [unique, not_null]
+      - name: team_abbreviation
+        description: Dernière abréviation connue.
+        data_tests: [unique, not_null]
