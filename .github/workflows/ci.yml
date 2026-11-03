@@ -33,13 +33,24 @@ jobs:
       - name: Installer le projet et les outils de développement
         run: |
           python -m pip install --upgrade pip
-          pip install ".[dev]"
+          pip install ".[dev,dbt]"
 
       - name: Lint (ruff)
         run: ruff check .
 
       - name: Tests (pytest)
         run: pytest -v
+
+      - name: Vérifier les modèles dbt
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: "5432"
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: ci
+        run: |
+          dbt deps --project-dir dbt --profiles-dir dbt
+          dbt parse --project-dir dbt --profiles-dir dbt
 
   dag-import:
     name: Import du DAG
@@ -69,5 +80,4 @@ jobs:
 
       - name: Tester le DAG
         run: python -m pytest tests/dags --noconftest -q
-
 
