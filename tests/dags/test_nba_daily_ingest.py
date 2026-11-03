@@ -31,13 +31,16 @@ def dag() -> "DAG":
 
 
 def test_dag_has_expected_tasks(dag: "DAG") -> None:
-    assert set(dag.task_ids) == {"ingest_team", "ingest_player", "check_bronze_quality"}
+    assert set(dag.task_ids) == {
+        "ingest_team", "ingest_player", "check_bronze_quality", "dbt_build",
+    }
 
 
 def test_tasks_run_in_order(dag: "DAG") -> None:
     assert dag.get_task("ingest_team").downstream_task_ids == {"ingest_player"}
     assert dag.get_task("ingest_player").downstream_task_ids == {"check_bronze_quality"}
-    assert dag.get_task("check_bronze_quality").downstream_task_ids == set()
+    assert dag.get_task("check_bronze_quality").downstream_task_ids == {"dbt_build"}
+    assert dag.get_task("dbt_build").downstream_task_ids == set()
 
 
 def test_schedule_is_daily_without_catchup(dag: "DAG") -> None:
@@ -54,4 +57,11 @@ def test_ingestion_loads_the_season_of_the_run_date(dag: "DAG") -> None:
 def test_only_ingestion_is_retried(dag: "DAG") -> None:
     for task_id in INGEST_TASKS:
         assert dag.get_task(task_id).retries == 2
-    assert dag.get_task("check_bronze_quality").retries == 0
+    for task_id in ("check_bronze_quality", "dbt_build"):
+        assert dag.get_task(task_id).retries == 0
+
+
+def test_dbt_build_loads_env_and_builds_the_project(dag: "DAG") -> None:
+    command = dag.get_task("dbt_build").bash_command
+    assert ". ./.env" in command
+    assert "dbt build --project-dir dbt --profiles-dir dbt" in command
