@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "basketdb"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "54d242c6-4020-4952-8e14-e65fa2ce1d20"
+  }
+}

@@ -1,0 +1,17 @@
+relationship AutoDetected_f96f823c-826b-4588-a6bf-4a11b3c4e18a
+	fromColumn: fact_team_game.season
+	toColumn: dim_season.season
+
+relationship AutoDetected_7fbb9203-665e-4ae4-8ad8-2b55172e0192
+	fromColumn: fact_team_game.team_id
+	toColumn: dim_team.team_id
+
+relationship 4dde94e7-fdf2-2f67-a2ba-d1fcf7a2e21d
+	fromColumn: fact_team_game.game_date
+	toColumn: dim_date.date_day
+
+relationship 653e30ff-f9ca-ca0f-f7a7-67ee26070679
+	isActive: false
+	fromColumn: fact_team_game.opponent_team_id
+	toColumn: dim_team.team_id
+

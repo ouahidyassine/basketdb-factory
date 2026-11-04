@@ -1,0 +1,88 @@
+table dim_season
+	lineageTag: 923e4cf6-35b7-4dae-a894-f69bbe8fe7f2
+
+	column season
+		dataType: string
+		lineageTag: 672cfaac-8433-415e-9014-017a6bbb1556
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 3567114a-0876-4c33-bbc7-43f8537406c7
+		summarizeBy: none
+		sourceColumn: start_year
+
+		annotation SummarizationSetBy = User
+
+	column first_game_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ab2ae5cb-aed9-473c-af18-c7c43b0d6e75
+		summarizeBy: none
+		sourceColumn: first_game_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column last_game_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f0432ef7-47dd-474f-a873-761cd0dd7c33
+		summarizeBy: none
+		sourceColumn: last_game_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column games_played
+		dataType: int64
+		formatString: 0
+		lineageTag: a1ef735c-9b09-4a8d-89ff-3112a25a43db
+		summarizeBy: none
+		sourceColumn: games_played
+
+		annotation SummarizationSetBy = User
+
+	column is_shortened
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0f46f473-8ea3-46de-bc6c-3edb93af5cef
+		summarizeBy: none
+		sourceColumn: is_shortened
+
+		annotation SummarizationSetBy = Automatic
+
+	column note
+		dataType: string
+		lineageTag: ba3c222d-7984-4fe3-a37e-52c641c56de4
+		summarizeBy: none
+		sourceColumn: note
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_complete
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d0307375-f1a7-4c56-b1fb-7ab255dafa18
+		summarizeBy: none
+		sourceColumn: is_complete
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_season = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "basketdb"),
+				    gold_dim_season = Source{[Schema="gold",Item="dim_season"]}[Data]
+				in
+				    gold_dim_season
+
+	changedProperty = Name
+

@@ -1,0 +1,48 @@
+table dim_team
+	lineageTag: 0d8a4507-91ba-4d03-88c7-3fa2e98b44b3
+
+	column team_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c56203a6-7ed3-4973-baa7-8b72b59f9a9d
+		summarizeBy: none
+		sourceColumn: team_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column team_abbreviation
+		dataType: string
+		lineageTag: c3756337-40d9-454b-92fe-53c3f283f72d
+		summarizeBy: none
+		sourceColumn: team_abbreviation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column team_name
+		dataType: string
+		lineageTag: ec869913-9730-4810-b958-382646c262eb
+		summarizeBy: none
+		sourceColumn: team_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_team = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "basketdb"),
+				    gold_dim_team = Source{[Schema="gold",Item="dim_team"]}[Data]
+				in
+				    gold_dim_team
+
+	changedProperty = Name
+
+	changedProperty = IsHidden
+

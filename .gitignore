@@ -21,5 +21,9 @@ dbt/.user.yml
 logs/
 *.log
 
+# Power BI : cache des données importées et réglages propres à la machine
+powerbi/**/.pbi/cache.abf
+powerbi/**/.pbi/localSettings.json
+
 # Éditeur
 .vscode/
