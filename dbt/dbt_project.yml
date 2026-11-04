@@ -19,6 +19,8 @@ models:
     marts:
       +schema: gold
       +materialized: table
+      +grants:
+        select: ["powerbi_reader"]
 
 seeds:
   basketdb:
