@@ -148,3 +148,20 @@ curl -s http://localhost:8081/api/v2/monitor/health
 | Le navigateur affiche une autre application sur un port | `netstat -ano \| findstr :PORT` (PowerShell) | Un programme Windows occupe déjà ce port |
 | `ss` montre le port sans nom de processus | `sudo ss -ltnp \| grep ':PORT '` | Un processus d'un autre utilisateur (par exemple `docker-proxy`) occupe ce port |
 | `Unit file postgresql.service does not exist` | `dpkg -l postgresql` | PostgreSQL n'est pas installé |
+
+## Rôle en lecture seule pour Power BI
+
+Power BI se connecte avec un rôle qui ne peut lire que le schéma `gold`. À créer une seule fois, en super-utilisateur, **après** un premier `dbt build`, qui crée le schéma :
+
+```bash
+sudo -u postgres psql -p 5433 -d basketdb
+```
+
+```sql
+CREATE ROLE powerbi_reader LOGIN;
+\password powerbi_reader
+GRANT CONNECT ON DATABASE basketdb TO powerbi_reader;
+GRANT USAGE ON SCHEMA gold TO powerbi_reader;
+```
+
+Le droit de lecture sur les tables de `gold` est appliqué par dbt à chaque construction (`+grants` dans `dbt/dbt_project.yml`) : il ne se donne pas à la main, puisque dbt recrée les tables chaque jour.
