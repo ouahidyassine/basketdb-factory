@@ -15,6 +15,7 @@ Guide d'installation de l'environnement de développement de BasketDB Factory so
 |---|---|---|
 | PostgreSQL (WSL2) | 5433 | 5432 occupé par le PostgreSQL Windows de HCP |
 | Airflow api-server | 8081 | 8080 occupé par un composant EDB côté Windows |
+| Documentation dbt (`dbt docs serve`) | 8082 | 8080 et 8081 déjà pris |
 
 ## PostgreSQL
 
@@ -148,6 +149,9 @@ curl -s http://localhost:8081/api/v2/monitor/health
 | Le navigateur affiche une autre application sur un port | `netstat -ano \| findstr :PORT` (PowerShell) | Un programme Windows occupe déjà ce port |
 | `ss` montre le port sans nom de processus | `sudo ss -ltnp \| grep ':PORT '` | Un processus d'un autre utilisateur (par exemple `docker-proxy`) occupe ce port |
 | `Unit file postgresql.service does not exist` | `dpkg -l postgresql` | PostgreSQL n'est pas installé |
+| `sudo` refuse le mot de passe oublié | `wsl -d Ubuntu-24.04 -u root` (PowerShell), puis `passwd <utilisateur>` | Le mot de passe du compte Linux se réinitialise depuis Windows, en root |
+| Power BI : `The remote certificate is invalid` | Paramètres de la source de données dans Power BI | Certificat autosigné de PostgreSQL : désactiver le chiffrement pour cette source locale |
+| `permission denied for schema gold` pour `powerbi_reader` | `sudo -u postgres psql -p 5433 -d basketdb -c "\dn+ gold"` | Le `GRANT USAGE` a été exécuté dans une autre base : le relancer avec `-d basketdb` |
 
 ## Rôle en lecture seule pour Power BI
 
@@ -165,3 +169,5 @@ GRANT USAGE ON SCHEMA gold TO powerbi_reader;
 ```
 
 Le droit de lecture sur les tables de `gold` est appliqué par dbt à chaque construction (`+grants` dans `dbt/dbt_project.yml`) : il ne se donne pas à la main, puisque dbt recrée les tables chaque jour.
+
+**Connexion depuis Power BI Desktop** : source PostgreSQL `localhost:5433`, base `basketdb`, mode Import, identifiants de `powerbi_reader`. Le certificat de PostgreSQL étant autosigné, le chiffrement est désactivé pour cette seule source (File → Options and settings → Data source settings → Edit Permissions) : acceptable pour une connexion locale, à remplacer par un certificat signé dans tout autre contexte.
