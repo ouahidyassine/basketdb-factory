@@ -1,4 +1,4 @@
-"""DAG quotidien : recharge dans Bronze la saison NBA de la date du run."""
+"""DAG quotidien : recharge Bronze, contrôle sa qualité, puis construit Silver et Gold avec dbt."""
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -8,6 +8,11 @@ from airflow.sdk import DAG
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 INGEST_BIN = PROJECT_DIR / ".venv" / "bin" / "basketdb-ingest"
 CHECK_BIN = PROJECT_DIR / ".venv" / "bin" / "basketdb-check"
+DBT_BIN = PROJECT_DIR / ".venv" / "bin" / "dbt"
+DBT_BUILD_COMMAND = (
+    f"set -a && . ./.env && set +a && "
+    f"{DBT_BIN} build --project-dir dbt --profiles-dir dbt"
+)
 
 
 def ingest_command(level: str) -> str:
@@ -26,13 +31,13 @@ default_args = {
 
 with DAG(
     dag_id="nba_daily_ingest",
-    description="Recharge chaque jour la saison NBA en cours dans la couche Bronze.",
+    description="Recharge la saison NBA en cours, contrôle Bronze, puis construit Silver et Gold.",
     schedule="0 10 * * *",
     start_date=datetime(2026, 10, 1, tzinfo=UTC),
     catchup=False,
     max_active_runs=1,
     default_args=default_args,
-    tags=["basketdb", "bronze"],
+    tags=["basketdb", "bronze", "dbt"],
 ) as dag:
     ingest_team = BashOperator(
         task_id="ingest_team",
@@ -50,5 +55,11 @@ with DAG(
         cwd=str(PROJECT_DIR),
         retries=0,
     )
+    dbt_build = BashOperator(
+        task_id="dbt_build",
+        bash_command=DBT_BUILD_COMMAND,
+        cwd=str(PROJECT_DIR),
+        retries=0,
+    )
 
-    ingest_team >> ingest_player >> check_bronze_quality
+    ingest_team >> ingest_player >> check_bronze_quality >> dbt_build
