@@ -20,6 +20,7 @@ dependencies = [
 dev = [
     "pytest>=8",
     "ruff==0.16.10",
+    "pillow>=13,<14",
 ]
 dbt = [
        "dbt-core>=1.12,<1.13",
