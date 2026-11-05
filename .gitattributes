@@ -1,3 +1,7 @@
 # Power BI écrit ses fichiers avec des fins de ligne Windows (CRLF) : Git les garde
 # ainsi dans le dossier de travail, et les stocke en LF dans le dépôt.
 powerbi/** text eol=crlf
+# Fichiers binaires : aucune conversion de fin de ligne, aucun diff textuel
+*.png binary
+*.jpg binary
+*.abf binary
