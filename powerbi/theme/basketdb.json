@@ -1,0 +1,38 @@
+{
+  "name": "BasketDB",
+  "dataColors": [
+    "#F97316", "#64748B", "#FDBA74", "#94A3B8",
+    "#C2410C", "#334155", "#FED7AA", "#CBD5E1"
+  ],
+  "background": "#121821",
+  "foreground": "#F1F5F9",
+  "tableAccent": "#F97316",
+  "good": "#F97316",
+  "neutral": "#64748B",
+  "bad": "#475569",
+  "maximum": "#F97316",
+  "center": "#7C2D12",
+  "minimum": "#1F2A37",
+  "textClasses": {
+    "callout": { "fontFace": "Segoe UI Semibold", "fontSize": 28, "color": "#F1F5F9" },
+    "title":   { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#F1F5F9" },
+    "header":  { "fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#F1F5F9" },
+    "label":   { "fontFace": "Segoe UI",          "fontSize": 10, "color": "#94A3B8" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ "show": true, "color": { "solid": { "color": "#121821" } }, "transparency": 100 }],
+        "border": [{ "show": false }],
+        "dropShadow": [{ "show": false }],
+        "title": [{ "fontColor": { "solid": { "color": "#F1F5F9" } }, "fontFamily": "Segoe UI Semibold", "fontSize": 12 }]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#0B0F14" } }, "transparency": 0 }],
+        "outspace": [{ "color": { "solid": { "color": "#0B0F14" } } }]
+      }
+    }
+  }
+}
