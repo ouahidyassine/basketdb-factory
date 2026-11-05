@@ -57,7 +57,7 @@
           "verticalAlignment": {
             "expr": {
               "Literal": {
-                "Value": "'Top'"
+                "Value": "'Middle'"
               }
             }
           }
