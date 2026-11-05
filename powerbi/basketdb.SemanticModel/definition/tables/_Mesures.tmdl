@@ -1,0 +1,110 @@
+table _Mesures
+	lineageTag: 46adb4af-9c58-4c61-8fc7-e7d72ef47c01
+
+	measure 'Matchs (équipe)' = COUNTROWS ( fact_team_game )
+		formatString: 0
+		lineageTag: 05457241-eeba-4ef2-8330-d64f934d26c2
+
+	measure Victoires =
+			
+			CALCULATE ( COUNTROWS ( fact_team_game ), fact_team_game[is_win] = TRUE () )
+		formatString: 0
+		lineageTag: 735ce112-2c80-4280-89fd-fd981905c05d
+
+	measure 'Taux de victoire' = DIVIDE ( [Victoires], [Matchs (équipe)] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 8c369ebf-388c-402c-b5bc-ce2ff4f5547a
+
+	measure 'Taux de victoire à domicile' =
+			
+			CALCULATE (
+			    [Taux de victoire],
+			    fact_team_game[is_home] = TRUE (),
+			    fact_team_game[is_neutral_site] = FALSE ()
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 7cbc7c0a-022a-4674-81d0-2c31b1145fbc
+
+	measure 'Taux de victoire à l''extérieur' =
+			
+			CALCULATE (
+			    [Taux de victoire],
+			    fact_team_game[is_home] = FALSE (),
+			    fact_team_game[is_neutral_site] = FALSE ()
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: fce9888c-aba5-4a02-9ad8-7264a9b57b5f
+
+	measure 'Avantage du terrain' = [Taux de victoire à domicile] - [Taux de victoire à l'extérieur]
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 046ff05a-1d28-4882-a7c6-9e3ef9cfde70
+
+	measure 'Taux de victoire en back-to-back' =
+			
+			CALCULATE ( [Taux de victoire], fact_team_game[is_back_to_back] = TRUE () )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: fe15e552-5131-43fc-a172-5d0a1c4ee4c9
+
+	measure 'Taux de victoire hors back-to-back' =
+			
+			CALCULATE ( [Taux de victoire], fact_team_game[is_back_to_back] = FALSE () )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 55afe77c-6283-40bf-a58c-403f55f9b0ce
+
+	measure 'Taux de victoire avec plus de repos' =
+			
+			CALCULATE ( [Taux de victoire], fact_team_game[rest_advantage] > 0 )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: eae70065-e17a-4203-bc2d-286e9d93d971
+
+	measure 'Taux de victoire avec moins de repos' =
+			
+			CALCULATE ( [Taux de victoire], fact_team_game[rest_advantage] < 0 )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 2d0e9287-219a-4c39-b1c6-59bcd40a4496
+
+	measure 'Taux de victoire en meilleure forme' =
+			
+			CALCULATE (
+			    [Taux de victoire],
+			    FILTER (
+			        fact_team_game,
+			        fact_team_game[form_games] >= 5
+			            && NOT ISBLANK ( fact_team_game[opponent_win_rate_last_10] )
+			            && fact_team_game[win_rate_last_10] > fact_team_game[opponent_win_rate_last_10]
+			    )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 546a3af5-241d-4a63-a3dd-074f6ebaadb9
+
+	measure 'Matchs en tant qu''adversaire' =
+			
+			CALCULATE (
+			    [Matchs (équipe)],
+			    USERELATIONSHIP ( fact_team_game[opponent_team_id], dim_team[team_id] )
+			)
+		formatString: 0
+		lineageTag: a5a65124-1c32-4a77-a8a3-9784ae3b41c6
+
+	column Column1
+		dataType: string
+		isHidden
+		lineageTag: 3c336668-b83c-40fe-a171-31295ab90615
+		summarizeBy: none
+		sourceColumn: Column1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Mesures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
