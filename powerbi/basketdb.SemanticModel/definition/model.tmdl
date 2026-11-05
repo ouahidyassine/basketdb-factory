@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["dim_date","dim_season","dim_team","fact_team_game"]
+annotation PBI_QueryOrder = ["dim_date","dim_season","dim_team","fact_team_game","_Mesures"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -17,6 +17,7 @@ ref table dim_date
 ref table dim_season
 ref table dim_team
 ref table fact_team_game
+ref table _Mesures
 
 ref cultureInfo en-US
 

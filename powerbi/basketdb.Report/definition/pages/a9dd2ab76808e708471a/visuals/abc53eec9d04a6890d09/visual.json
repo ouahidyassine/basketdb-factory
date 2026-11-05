@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "abc53eec9d04a6890d09",
+  "position": {
+    "x": 16,
+    "y": 0,
+    "z": 0,
+    "height": 416,
+    "width": 1040,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_season"
+                    }
+                  },
+                  "Property": "season"
+                }
+              },
+              "queryRef": "dim_season.season",
+              "nativeQueryRef": "season"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Taux de victoire à l'extérieur"
+                }
+              },
+              "queryRef": "_Mesures.Taux de victoire à l'extérieur",
+              "nativeQueryRef": "Taux de victoire à l'extérieur"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Taux de victoire en back-to-back"
+                }
+              },
+              "queryRef": "_Mesures.Taux de victoire en back-to-back",
+              "nativeQueryRef": "Taux de victoire en back-to-back"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Taux de victoire avec plus de repos"
+                }
+              },
+              "queryRef": "_Mesures.Taux de victoire avec plus de repos",
+              "nativeQueryRef": "Taux de victoire avec plus de repos"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Taux de victoire à domicile"
+                }
+              },
+              "queryRef": "_Mesures.Taux de victoire à domicile",
+              "nativeQueryRef": "Taux de victoire à domicile"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

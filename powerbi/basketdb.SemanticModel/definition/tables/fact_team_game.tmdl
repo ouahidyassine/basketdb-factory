@@ -29,12 +29,12 @@ table fact_team_game
 		isHidden
 		formatString: 0
 		lineageTag: 77516430-c8ba-4597-8fc5-500dedad95e1
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: opponent_team_id
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column game_date
 		dataType: dateTime
@@ -142,34 +142,34 @@ table fact_team_game
 		dataType: int64
 		formatString: 0
 		lineageTag: e406eda1-e676-4792-8f4d-64c0a3102028
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: rest_days
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column opponent_rest_days
 		dataType: int64
 		formatString: 0
 		lineageTag: a5818dcb-8072-4c3a-aece-88f9b9b0e0c0
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: opponent_rest_days
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column rest_advantage
 		dataType: int64
 		formatString: 0
 		lineageTag: 1a67313b-6619-413b-8d67-da3c2e8a0708
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: rest_advantage
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column is_back_to_back
 		dataType: boolean
@@ -196,24 +196,24 @@ table fact_team_game
 	column win_rate_last_10
 		dataType: double
 		lineageTag: d01e99c5-ae6c-4748-b017-ac2e020bda46
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: win_rate_last_10
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column opponent_win_rate_last_10
 		dataType: double
 		lineageTag: 087da736-094a-41ca-9f65-30c29c7934e9
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: opponent_win_rate_last_10
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
