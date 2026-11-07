@@ -15,3 +15,7 @@ relationship 653e30ff-f9ca-ca0f-f7a7-67ee26070679
 	fromColumn: fact_team_game.opponent_team_id
 	toColumn: dim_team.team_id
 
+relationship AutoDetected_dfffbe00-e056-424d-9fbb-bb8b99fb6d10
+	fromColumn: fact_team_game.opponent_team_id
+	toColumn: dim_opponent.opponent_team_id
+

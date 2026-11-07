@@ -1,0 +1,42 @@
+table dim_opponent
+	lineageTag: 9c3e904b-6bf3-4489-a3a4-bfba0a7394fd
+
+	column opponent_team_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b506c8e0-767a-4443-9bd3-857fa6778fed
+		summarizeBy: none
+		sourceColumn: opponent_team_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column opponent_abbreviation
+		dataType: string
+		lineageTag: 3c19a0f0-a546-4402-a463-c16b9bf7748a
+		summarizeBy: none
+		sourceColumn: opponent_abbreviation
+
+		annotation SummarizationSetBy = Automatic
+
+	column opponent_name
+		dataType: string
+		lineageTag: 2615a4aa-5eba-4080-bc57-d681679d3ce2
+		summarizeBy: none
+		sourceColumn: opponent_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_opponent = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5433", "basketdb"),
+				    gold_dim_opponent = Source{[Schema="gold",Item="dim_opponent"]}[Data]
+				in
+				    gold_dim_opponent
+
+	changedProperty = Name
+

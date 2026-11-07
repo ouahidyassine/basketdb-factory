@@ -217,6 +217,45 @@ table fact_team_game
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column venue
+		dataType: string
+		lineageTag: 7329fa27-faf9-4544-ab1f-92ca41bf7b67
+		summarizeBy: none
+		sourceColumn: venue
+
+		annotation SummarizationSetBy = Automatic
+
+	column result
+		dataType: string
+		lineageTag: 9fccf9b8-280a-446f-bbe6-d42e7ba02fcf
+		summarizeBy: none
+		sourceColumn: result
+
+		annotation SummarizationSetBy = Automatic
+
+	column rest_bucket
+		dataType: string
+		lineageTag: 7a5f82c8-ac53-4aee-9305-583355493c41
+		summarizeBy: none
+		sourceColumn: rest_bucket
+		sortByColumn: rest_bucket_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column rest_bucket_order
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 35c002db-50b6-4e16-b4a3-38020079afee
+		summarizeBy: none
+		sourceColumn: rest_bucket_order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
 	partition fact_team_game = m
 		mode: import
 		source =
@@ -225,8 +264,6 @@ table fact_team_game
 				    gold_fact_team_game = Source{[Schema="gold",Item="fact_team_game"]}[Data]
 				in
 				    gold_fact_team_game
-
-	changedProperty = Name
 
 	changedProperty = IsHidden
 

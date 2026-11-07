@@ -40,6 +40,15 @@ models:
         description: Saison à laquelle appartient le jour, au format 2015-16.
         data_tests: [not_null]
 
+  - name: dim_opponent
+    description: >
+      Une ligne par équipe, dans son rôle d'adversaire : copie de dim_team, reliée
+      à fact_team_game par opponent_team_id, pour filtrer l'équipe et l'adversaire séparément.
+    columns:
+      - name: opponent_team_id
+        description: Identifiant de l'adversaire ; clé de la dimension.
+        data_tests: [unique, not_null]
+
   - name: fact_team_game
     description: >
       Une ligne par équipe et par match : résultat, points, et variables connues avant
@@ -51,6 +60,9 @@ models:
       - dbt_utils.equal_rowcount:
           arguments:
             compare_model: ref('int_team_games_enriched')
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "(venue = 'Terrain neutre') = is_neutral_site"
     columns:
       - name: team_id
         description: Équipe de la ligne ; relation active vers dim_team.
@@ -61,13 +73,19 @@ models:
                 to: ref('dim_team')
                 field: team_id
       - name: opponent_team_id
-        description: Adversaire ; seconde relation vers dim_team, à rendre inactive dans Power BI.
+        description: >
+          Adversaire ; relation active vers dim_opponent, et relation inactive vers dim_team,
+          activée par USERELATIONSHIP dans les mesures qui en ont besoin.
         data_tests:
           - not_null
           - relationships:
               arguments:
                 to: ref('dim_team')
                 field: team_id
+          - relationships:
+              arguments:
+                to: ref('dim_opponent')
+                field: opponent_team_id
       - name: game_date
         description: Date du match ; relation vers dim_date.
         data_tests:
@@ -87,3 +105,21 @@ models:
       - name: is_win
         description: Vrai si l'équipe a gagné le match.
         data_tests: [not_null]
+      - name: venue
+        description: Lieu du match, du point de vue de l'équipe.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Domicile', 'Extérieur', 'Terrain neutre']
+      - name: result
+        description: Résultat du match pour l'équipe.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Victoire', 'Défaite']
+      - name: rest_bucket
+        description: Tranche de jours de repos avant le match ; trier par rest_bucket_order.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Premier match', '0 jour (back-to-back)', '1 jour', '2 jours', '3 jours et plus']

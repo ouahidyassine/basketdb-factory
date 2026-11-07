@@ -86,6 +86,19 @@ table _Mesures
 		formatString: 0
 		lineageTag: a5a65124-1c32-4a77-a8a3-9784ae3b41c6
 
+	measure Matchs = DISTINCTCOUNT ( fact_team_game[game_id] )
+		formatString: 0
+		lineageTag: 7fe24eb3-12af-4e95-8fcb-0c531a585d0e
+
+	measure Défaites = [Matchs (équipe)] - [Victoires]
+		formatString: 0
+		lineageTag: 8a93bd3c-19b5-4a27-9ca0-abe41c25ea44
+
+	measure 'Écart moyen' = AVERAGE ( fact_team_game[point_diff] )
+		lineageTag: 28aa2625-0c79-49db-88d6-b35edc3cdf63
+
+		formatStringDefinition = "+0.0;-0.0;0.0"
+
 	column Column1
 		dataType: string
 		isHidden

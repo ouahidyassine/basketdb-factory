@@ -42,7 +42,5 @@ table dim_team
 				in
 				    gold_dim_team
 
-	changedProperty = Name
-
 	changedProperty = IsHidden
 

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
-  "name": "7c601108127d59ae0881",
+  "name": "a559fc5e3134e6dbe921",
   "position": {
-    "x": 72,
-    "y": 456,
-    "z": 1000,
-    "height": 168,
-    "width": 192,
-    "tabOrder": 1000
+    "x": 552,
+    "y": 960,
+    "z": 5000,
+    "height": 120,
+    "width": 456,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,12 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Taux de victoire en meilleure forme"
+                  "Property": "Écart moyen"
                 }
               },
-              "queryRef": "_Mesures.Taux de victoire en meilleure forme",
-              "nativeQueryRef": "Taux de victoire en meilleure forme"
+              "queryRef": "_Mesures.Écart moyen",
+              "nativeQueryRef": "Écart moyen",
+              "format": "+0.0;-0.0;0.0"
             }
           ]
         }
@@ -42,7 +43,7 @@
                     "Entity": "_Mesures"
                   }
                 },
-                "Property": "Taux de victoire en meilleure forme"
+                "Property": "Écart moyen"
               }
             },
             "direction": "Descending"
