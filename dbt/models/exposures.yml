@@ -13,5 +13,6 @@ exposures:
       - ref('dim_team')
       - ref('dim_date')
       - ref('dim_season')
+      - ref('dim_opponent')
     owner:
       name: Ouahid Yassine
