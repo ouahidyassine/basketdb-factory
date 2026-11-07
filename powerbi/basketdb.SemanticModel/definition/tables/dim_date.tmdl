@@ -75,7 +75,5 @@ table dim_date
 				in
 				    gold_dim_date
 
-	changedProperty = Name
-
 	annotation PBI_ResultType = Table
 

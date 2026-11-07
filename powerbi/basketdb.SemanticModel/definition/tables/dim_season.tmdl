@@ -84,5 +84,3 @@ table dim_season
 				in
 				    gold_dim_season
 
-	changedProperty = Name
-
