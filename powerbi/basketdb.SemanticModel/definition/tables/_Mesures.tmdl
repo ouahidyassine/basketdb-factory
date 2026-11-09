@@ -36,8 +36,9 @@ table _Mesures
 		lineageTag: fce9888c-aba5-4a02-9ad8-7264a9b57b5f
 
 	measure 'Avantage du terrain' = [Taux de victoire à domicile] - [Taux de victoire à l'extérieur]
-		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 046ff05a-1d28-4882-a7c6-9e3ef9cfde70
+
+		formatStringDefinition = "+0.0%;-0.0%;0.0%"
 
 	measure 'Taux de victoire en back-to-back' =
 			
