@@ -3,8 +3,8 @@
   "name": "cdb28e8c38bce45d5dd0",
   "displayName": "Face-à-face",
   "displayOption": "FitToPage",
-  "height": 1440,
-  "width": 2560,
+  "height": 720,
+  "width": 1280,
   "objects": {
     "background": [
       {
@@ -14,7 +14,7 @@
               "name": {
                 "expr": {
                   "Literal": {
-                    "Value": "'page.png'"
+                    "Value": "'face_a_face.png'"
                   }
                 }
               },
@@ -23,14 +23,14 @@
                   "ResourcePackageItem": {
                     "PackageName": "RegisteredResources",
                     "PackageType": 1,
-                    "ItemName": "page04067821189889265.png"
+                    "ItemName": "face_a_face7438655412844295.png"
                   }
                 }
               },
               "scaling": {
                 "expr": {
                   "Literal": {
-                    "Value": "'Normal'"
+                    "Value": "'Fill'"
                   }
                 }
               }

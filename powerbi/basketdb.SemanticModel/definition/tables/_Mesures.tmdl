@@ -37,8 +37,9 @@ table _Mesures
 
 	measure 'Avantage du terrain' = [Taux de victoire à domicile] - [Taux de victoire à l'extérieur]
 		lineageTag: 046ff05a-1d28-4882-a7c6-9e3ef9cfde70
+		dataCategory: Uncategorized
 
-		formatStringDefinition = "+0.0%;-0.0%;0.0%"
+		formatStringDefinition = "+0.0"" pts"";-0.0"" pts"";0.0"" pts"""
 
 	measure 'Taux de victoire en back-to-back' =
 			
@@ -99,6 +100,71 @@ table _Mesures
 		lineageTag: 28aa2625-0c79-49db-88d6-b35edc3cdf63
 
 		formatStringDefinition = "+0.0;-0.0;0.0"
+
+	measure 'Taux du facteur' =
+			
+			SWITCH (
+			    SELECTEDVALUE ( Facteurs[Facteur] ),
+			    "Meilleure forme que l'adversaire", [Taux de victoire en meilleure forme],
+			    "À domicile", [Taux de victoire à domicile],
+			    "Plus de repos que l'adversaire", [Taux de victoire avec plus de repos],
+			    "Hors back-to-back", [Taux de victoire hors back-to-back],
+			    "Moins de repos que l'adversaire", [Taux de victoire avec moins de repos],
+			    "En back-to-back", [Taux de victoire en back-to-back],
+			    "À l'extérieur", [Taux de victoire à l'extérieur]
+			)
+		lineageTag: 6e1fe555-6b7c-474b-9caa-04a19bffa3b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avantage du terrain (pts)' = [Avantage du terrain] * 100
+		lineageTag: 3b368b38-74fe-400b-a630-238620378331
+
+		formatStringDefinition = "+0.0"" pts"";-0.0"" pts"";0.0"" pts"""
+
+	measure 'Saisons analysées' = DISTINCTCOUNT ( fact_team_game[season] )
+		formatString: 0
+		lineageTag: 3c786bb7-3507-4b99-9bd4-2d51b7dc3190
+
+	measure 'Meilleur taux à domicile' =
+			
+			MAXX ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: b2715c13-b1e1-464f-bf75-b9d7f588899f
+
+	measure 'Meilleure saison à domicile' =
+			
+			VAR meilleur = [Meilleur taux à domicile]
+			RETURN
+			    "Saison "
+			        & CONCATENATEX (
+			            FILTER ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] = meilleur ),
+			            dim_season[season],
+			            ", "
+			        )
+		lineageTag: 70e6f059-bd1d-4823-974b-e24e57fcf42b
+
+	measure 'Plus faible taux à domicile' =
+			
+			MINX ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 0bffc053-76ce-42ad-a599-b01f3f4cd02a
+
+	measure 'Saison la plus faible à domicile' =
+			
+			VAR plus_faible = [Plus faible taux à domicile]
+			RETURN
+			    "Saison "
+			        & CONCATENATEX (
+			            FILTER ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] = plus_faible ),
+			            dim_season[season],
+			            ", "
+			        )
+		lineageTag: deaef933-c081-4dd9-a1ab-5b6f3ea54410
+
+	measure 'Taux de victoire (carte de chaleur)' = [Taux de victoire]
+		formatString: 0%;-0%;0%
+		lineageTag: 29825398-478d-4879-8a63-7d9a4db74220
 
 	column Column1
 		dataType: string

@@ -3221,6 +3221,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.476
 			          }
+			        },
+			        {
+			          "%": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -3744,6 +3754,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "À  domicile": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        },
 			        {
@@ -4600,55 +4620,603 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
-			    }
-			  },
-			  "Relationships": {
-			    "fact_team_game_has_dim_team": {
-			      "Binding": {
-			        "ConceptualEntity": "fact_team_game"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fact_team_game": {
-			          "Target": {
-			            "Entity": "fact_team_game"
-			          }
-			        },
-			        "dim_team": {
-			          "Target": {
-			            "Entity": "dim_team"
-			          }
+			    },
+			    "entity__mesure.taux_du_facteur": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Taux du facteur"
 			        }
 			      },
-			      "Phrasings": [
+			      "State": "Generated",
+			      "Terms": [
 			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fact_team_game"
-			            },
-			            "Object": {
-			              "Role": "dim_team"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fact_team_games_have_dim_teams"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_team"
-			            },
-			            "Object": {
-			              "Role": "fact_team_game"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dim_teams_have_fact_team_games"
+			          "taux du facteur": {
+			            "State": "Generated"
+			          }
 			        }
 			      ]
 			    },
+			    "facteur": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Facteurs"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "facteur": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "facteur.facteur": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Facteurs",
+			          "ConceptualProperty": "Facteur"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "facteur": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "facteur name": {
+			            "State": "Generated"
+			          }
+			        }
+			      ],
+			      "NameType": "Name"
+			    },
+			    "facteur.ordre": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Facteurs",
+			          "ConceptualProperty": "Ordre"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "ordre": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.avantage_du_terrain_pts": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Avantage du terrain (pts)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "avantage du terrain (pts)": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "avantage du terrain": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "Taux à domicile  - Taux à l'extérieur": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.entity__avantage_du_terrain_pts_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "_Avantage du terrain (pts) FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_avantage du terrain (pts) FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "dim_season.season_short": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_season",
+			          "ConceptualProperty": "season_short"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "season short": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "season_short": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "short": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "small": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "little": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "petite": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "squat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "diminutive": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "brief": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "quick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "rapid": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "fleeting": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "passing": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.saisons_analysées": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Saisons analysées"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saisons analysées": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.meilleur_taux_à_domicile": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Meilleur taux à domicile"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "meilleur taux à domicile": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "meilleur taux à residence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "meilleur taux à apartment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "meilleur taux à home": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleur taux à flat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleur taux à house": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleur taux à dwelling": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleur taux à abode": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleur taux à address": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.meilleure_saison_à_domicile": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Meilleure saison à domicile"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "meilleure saison à domicile": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "meilleure saison à residence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "meilleure saison à apartment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "meilleure saison à home": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleure saison à flat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleure saison à house": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleure saison à dwelling": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleure saison à abode": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "meilleure saison à address": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.plus_faible_taux_à_domicile": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Plus faible taux à domicile"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "plus faible taux à domicile": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "plus faible taux à residence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "plus faible taux à apartment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "plus faible taux à home": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "plus faible taux à flat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "plus faible taux à house": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "plus faible taux à dwelling": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "plus faible taux à abode": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "plus faible taux à address": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.saison_la_plus_faible_à_domicile": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Saison la plus faible à domicile"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "saison la plus faible à domicile": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.taux_de_victoire_carte_de_chaleur": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Taux de victoire (carte de chaleur)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "taux de victoire (carte de chaleur)": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "taux de victoire": {
+			            "State": "Generated",
+			            "Weight": 0.75
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
 			    "fact_team_game_has_dim_season": {
 			      "Binding": {
 			        "ConceptualEntity": "fact_team_game"
@@ -4692,6 +5260,448 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_seasons_have_fact_team_games"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_taux_de_victoire_carte_de_chaleur": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.taux_de_victoire_carte_de_chaleur": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_de_victoire_carte_de_chaleur"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_de_victoire_carte_de_chaleur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_taux_de_victoire_carte_de_chaleur"
+			        }
+			      ]
+			    },
+			    "dim_season_has_entity__mesure_saison_la_plus_faible_à_domicile": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_season"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_season": {
+			          "Target": {
+			            "Entity": "dim_season"
+			          }
+			        },
+			        "entity__mesure.saison_la_plus_faible_à_domicile": {
+			          "Target": {
+			            "Entity": "entity__mesure.saison_la_plus_faible_à_domicile"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_season"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.saison_la_plus_faible_à_domicile"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_seasons_have_saison_la_plus_faible_à_domicile"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_plus_faible_taux_à_domicile": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.plus_faible_taux_à_domicile": {
+			          "Target": {
+			            "Entity": "entity__mesure.plus_faible_taux_à_domicile"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.plus_faible_taux_à_domicile"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_plus_faible_taux_à_domicile"
+			        }
+			      ]
+			    },
+			    "dim_season_has_entity__mesure_plus_faible_taux_à_domicile": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_season"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_season": {
+			          "Target": {
+			            "Entity": "dim_season"
+			          }
+			        },
+			        "entity__mesure.plus_faible_taux_à_domicile": {
+			          "Target": {
+			            "Entity": "entity__mesure.plus_faible_taux_à_domicile"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_season"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.plus_faible_taux_à_domicile"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_seasons_have_plus_faible_taux_à_domicile"
+			        }
+			      ]
+			    },
+			    "dim_season_has_entity__mesure_meilleure_saison_à_domicile": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_season"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_season": {
+			          "Target": {
+			            "Entity": "dim_season"
+			          }
+			        },
+			        "entity__mesure.meilleure_saison_à_domicile": {
+			          "Target": {
+			            "Entity": "entity__mesure.meilleure_saison_à_domicile"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_season"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.meilleure_saison_à_domicile"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_seasons_have_meilleure_saison_à_domicile"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_meilleur_taux_à_domicile": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.meilleur_taux_à_domicile": {
+			          "Target": {
+			            "Entity": "entity__mesure.meilleur_taux_à_domicile"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.meilleur_taux_à_domicile"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_meilleur_taux_à_domicile"
+			        }
+			      ]
+			    },
+			    "dim_season_has_entity__mesure_meilleur_taux_à_domicile": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_season"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_season": {
+			          "Target": {
+			            "Entity": "dim_season"
+			          }
+			        },
+			        "entity__mesure.meilleur_taux_à_domicile": {
+			          "Target": {
+			            "Entity": "entity__mesure.meilleur_taux_à_domicile"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_season"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.meilleur_taux_à_domicile"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_seasons_have_meilleur_taux_à_domicile"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_saisons_analysées": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.saisons_analysées": {
+			          "Target": {
+			            "Entity": "entity__mesure.saisons_analysées"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.saisons_analysées"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_saisons_analysées"
+			        }
+			      ]
+			    },
+			    "dim_season_has_season_short": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_season"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_season": {
+			          "Target": {
+			            "Entity": "dim_season"
+			          }
+			        },
+			        "dim_season.season_short": {
+			          "Target": {
+			            "Entity": "dim_season.season_short"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_season"
+			            },
+			            "Object": {
+			              "Role": "dim_season.season_short"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_seasons_have_season_shorts"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_avantage_du_terrain_pts": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.avantage_du_terrain_pts": {
+			          "Target": {
+			            "Entity": "entity__mesure.avantage_du_terrain_pts"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.avantage_du_terrain_pts"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_avantage_du_terrain_pts"
+			        }
+			      ]
+			    },
+			    "facteur_has_facteur": {
+			      "Binding": {
+			        "ConceptualEntity": "Facteurs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "facteur": {
+			          "Target": {
+			            "Entity": "facteur"
+			          }
+			        },
+			        "facteur.facteur": {
+			          "Target": {
+			            "Entity": "facteur.facteur"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "facteur"
+			            },
+			            "Object": {
+			              "Role": "facteur.facteur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "facteurs_have_facteurs"
+			        },
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "facteur"
+			            },
+			            "Name": {
+			              "Role": "facteur.facteur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "facteurs_are_names_IDs_of_facteurs"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_taux_du_facteur": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.taux_du_facteur": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_du_facteur"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_du_facteur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_taux_du_facteur"
+			        }
+			      ]
+			    },
+			    "facteur_has_entity__mesure_taux_du_facteur": {
+			      "Binding": {
+			        "ConceptualEntity": "Facteurs"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "facteur": {
+			          "Target": {
+			            "Entity": "facteur"
+			          }
+			        },
+			        "entity__mesure.taux_du_facteur": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_du_facteur"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "facteur"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_du_facteur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "facteurs_have_taux_du_facteur"
 			        }
 			      ]
 			    },
@@ -6777,6 +7787,52 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_dim_dates_are_weekend_dim_dates"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_dim_team": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "dim_team": {
+			          "Target": {
+			            "Entity": "dim_team"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "dim_team"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_dim_teams"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_team"
+			            },
+			            "Object": {
+			              "Role": "fact_team_game"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_teams_have_fact_team_games"
 			        }
 			      ]
 			    },
