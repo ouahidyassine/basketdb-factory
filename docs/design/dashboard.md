@@ -83,20 +83,22 @@ Deux sources, selon l'état de la page :
 
 ### Face-à-face
 
-| Zone | Visuel | Champs | x | y | Largeur | Hauteur |
-|---|---|---|---|---|---|---|
-| segment_1 | Slicer (Dropdown) | dim_team[team_name] | 472 | 42 | 120 | 32 |
-| segment_2 | Slicer (Dropdown) | dim_opponent[opponent_name] | 624 | 42 | 120 | 32 |
-| segment_3 | Slicer (Dropdown) | dim_season[season] | 776 | 42 | 120 | 32 |
-| navigation | Page navigator | Pages visibles du rapport | 924 | 28 | 336 | 40 |
-| principal | Card (new) | [Bilan] | 32 | 152 | 272 | 104 |
-| mini_1 | Card (new) | [Matchs (équipe)] | 76 | 270 | 80 | 44 |
-| mini_2 | Card (new) | [Victoires] | 220 | 270 | 80 | 44 |
-| mini_3 | Card (new) | [Défaites] | 364 | 270 | 80 | 44 |
-| mini_4 | Card (new) | [Écart moyen] | 508 | 270 | 80 | 44 |
-| kpi | Card (new) | [Taux de victoire] | 640 | 148 | 272 | 60 |
-| a_la_une | Card (new) | [Plus large victoire] | 960 | 148 | 168 | 60 |
-| chaleur | Matrix | Lignes venue ; colonnes season_short ; [Taux de victoire] | 640 | 284 | 320 | 140 |
-| anneau | Donut chart | Légende result ; [Matchs (équipe)] | 1056 | 284 | 192 | 140 |
-| barres | Clustered column chart | season ; [Écart moyen] | 32 | 428 | 560 | 268 |
-| courbes | Line chart | game_date ; [Forme de l'équipe], [Forme de l'adversaire] | 640 | 500 | 608 | 196 |
+| Visuel | Champs | x | y | Largeur | Hauteur |
+|---|---|---|---|---|---|
+| pageNavigator | — | 924 | 26 | 336 | 40 |
+| slicer | season | 776 | 41 | 120 | 32 |
+| slicer | team_name | 472 | 42 | 120 | 32 |
+| slicer | opponent_name | 624 | 42 | 120 | 32 |
+| cardVisual | Taux de victoire | 650 | 136 | 272 | 60 |
+| cardVisual | Plus large victoire | 976 | 136 | 272 | 60 |
+| cardVisual | Bilan | 32 | 142 | 272 | 104 |
+| cardVisual | Date de la plus large victoire | 976 | 184 | 272 | 22 |
+| donutChart | result ; Matchs (équipe) | 1024 | 254 | 240 | 192 |
+| cardVisual | Matchs (équipe) | 76 | 270 | 80 | 44 |
+| cardVisual | Victoires | 220 | 270 | 80 | 44 |
+| cardVisual | Défaites | 364 | 270 | 80 | 44 |
+| cardVisual | Écart moyen | 502 | 270 | 80 | 44 |
+| pivotTable | season_short ; % ; Taux de victoire (carte de chaleur) | 624 | 272 | 370 | 144 |
+| cardVisual | Victoires | 1064 | 300 | 160 | 96 |
+| clusteredColumnChart | season_short ; Écart moyen | 32 | 428 | 560 | 268 |
+| lineChart | date_day ; Équipe ; Adversaire | 640 | 500 | 608 | 196 |

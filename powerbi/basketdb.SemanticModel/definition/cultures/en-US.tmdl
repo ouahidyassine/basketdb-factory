@@ -3659,6 +3659,16 @@ cultureInfo en-US
 			          "taux de victoire": {
 			            "State": "Generated"
 			          }
+			        },
+			        {
+			          "Victoires": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -5333,6 +5343,125 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "entity__mesure.bilan": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Bilan"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "bilan": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.plus_large_victoire": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Plus large victoire"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "plus large victoire": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.date_de_la_plus_large_victoire": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Date de la plus large victoire"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "date de la plus large victoire": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.forme_de_léquipe": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Forme de l'équipe"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "forme de l'équipe": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Équipe": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.forme_de_ladversaire": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Forme de l'adversaire"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "forme de l'adversaire": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Adversaire": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.entity__plus_large_victoire_FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "_Plus large victoire FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_plus large victoire FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
@@ -5379,6 +5508,171 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_seasons_have_fact_team_games"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_forme_de_ladversaire": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.forme_de_ladversaire": {
+			          "Target": {
+			            "Entity": "entity__mesure.forme_de_ladversaire"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.forme_de_ladversaire"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_forme_de_ladversaire"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_forme_de_léquipe": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.forme_de_léquipe": {
+			          "Target": {
+			            "Entity": "entity__mesure.forme_de_léquipe"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.forme_de_léquipe"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_forme_de_léquipe"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_date_de_la_plus_large_victoire": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.date_de_la_plus_large_victoire": {
+			          "Target": {
+			            "Entity": "entity__mesure.date_de_la_plus_large_victoire"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.date_de_la_plus_large_victoire"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_date_de_la_plus_large_victoire"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_plus_large_victoire": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.plus_large_victoire": {
+			          "Target": {
+			            "Entity": "entity__mesure.plus_large_victoire"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.plus_large_victoire"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_plus_large_victoire"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_bilan": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.bilan": {
+			          "Target": {
+			            "Entity": "entity__mesure.bilan"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.bilan"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_bilan"
 			        }
 			      ]
 			    },

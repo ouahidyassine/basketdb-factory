@@ -371,6 +371,34 @@
             }
           ]
         }
+      },
+      {
+        "name": "f16237bd6dd72c5820a4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_season"
+              }
+            },
+            "Property": "season_short"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cbf6f9f15b9428273509",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Mesures"
+              }
+            },
+            "Property": "Taux de victoire (carte de chaleur)"
+          }
+        },
+        "type": "Advanced"
       }
     ]
   }

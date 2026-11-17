@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_team_game"
+                      "Entity": "dim_season"
                     }
                   },
-                  "Property": "venue"
+                  "Property": "season"
                 }
               },
-              "queryRef": "fact_team_game.venue",
-              "nativeQueryRef": "venue",
+              "queryRef": "dim_season.season",
+              "nativeQueryRef": "season",
               "active": true
             }
           ]
@@ -235,11 +235,6 @@
         }
       ]
     },
-    "syncGroup": {
-      "groupName": "team_name1",
-      "fieldChanges": true,
-      "filterChanges": true
-    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
@@ -302,7 +297,8 @@
               }
             }
           ]
-        }
+        },
+        "howCreated": "User"
       }
     ]
   }

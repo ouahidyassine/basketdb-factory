@@ -5,6 +5,64 @@
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "77b4a8d44044eeb0568d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_season"
+              }
+            },
+            "Property": "is_complete"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "dim_season",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "is_complete"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
   "objects": {
     "background": [
       {
@@ -52,5 +110,37 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "959b7c629d66740c8a98",
+      "target": "490bc9572d4ac3bbd823",
+      "type": "DataFilter"
+    },
+    {
+      "source": "61c8b4ddb778ae103701",
+      "target": "959b7c629d66740c8a98",
+      "type": "DataFilter"
+    },
+    {
+      "source": "61c8b4ddb778ae103701",
+      "target": "490bc9572d4ac3bbd823",
+      "type": "DataFilter"
+    },
+    {
+      "source": "490bc9572d4ac3bbd823",
+      "target": "959b7c629d66740c8a98",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f8e67749d04a55c4b23c",
+      "target": "959b7c629d66740c8a98",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f8e67749d04a55c4b23c",
+      "target": "490bc9572d4ac3bbd823",
+      "type": "DataFilter"
+    }
+  ]
 }

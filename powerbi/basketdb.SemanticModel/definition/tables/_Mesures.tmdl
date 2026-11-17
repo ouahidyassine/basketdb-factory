@@ -161,7 +161,9 @@ table _Mesures
 			        )
 		lineageTag: deaef933-c081-4dd9-a1ab-5b6f3ea54410
 
-	measure 'Taux de victoire (carte de chaleur)' = [Taux de victoire]
+	measure 'Taux de victoire (carte de chaleur)' =
+			
+			IF ( [Matchs (équipe)] > 0, COALESCE ( [Taux de victoire], 0 ) )
 		formatString: 0%;-0%;0%
 		lineageTag: 29825398-478d-4879-8a63-7d9a4db74220
 
@@ -193,6 +195,60 @@ table _Mesures
 			    )
 			    & " matchs"
 		lineageTag: ade33ac4-cfff-4fca-9a74-bd3832b8def4
+
+	measure Bilan =
+			
+			VAR victoires = COALESCE ( [Victoires], 0 )
+			VAR defaites = COALESCE ( [Défaites], 0 )
+			RETURN
+			    IF (
+			        [Matchs (équipe)] > 0,
+			        FORMAT ( victoires, "#,0" ) & " – " & FORMAT ( defaites, "#,0" )
+			    )
+		lineageTag: 3e519bcb-570f-45fb-a9bc-fb835299a8cb
+
+	measure 'Plus large victoire' =
+			
+			CALCULATE (
+			    MAX ( fact_team_game[point_diff] ),
+			    fact_team_game[is_win] = TRUE ()
+			)
+		lineageTag: 727228ec-7f70-4091-b761-b9a1b0f53ba4
+
+		formatStringDefinition = "+0"" pts"""
+
+	measure 'Date de la plus large victoire' =
+			
+			VAR ecart = [Plus large victoire]
+			VAR jour =
+			    CALCULATE (
+			        MAX ( fact_team_game[game_date] ),
+			        fact_team_game[is_win] = TRUE (),
+			        fact_team_game[point_diff] = ecart
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( jour ), "le " & FORMAT ( jour, "dd/mm/yyyy" ) )
+		lineageTag: e485bfad-4bf5-4d35-8ec0-afeb96c74a50
+
+	measure 'Forme de l''équipe' =
+			
+			CALCULATE (
+			    AVERAGE ( fact_team_game[win_rate_last_10] ),
+			    fact_team_game[form_games] >= 5,
+			    NOT ISBLANK ( fact_team_game[opponent_win_rate_last_10] )
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: 304d0a2f-fbd0-436f-a4a9-b1c9f745ebc0
+
+	measure 'Forme de l''adversaire' =
+			
+			CALCULATE (
+			    AVERAGE ( fact_team_game[opponent_win_rate_last_10] ),
+			    fact_team_game[form_games] >= 5,
+			    NOT ISBLANK ( fact_team_game[opponent_win_rate_last_10] )
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: 09802610-2ee9-46c2-9f74-29942084e4b2
 
 	column Column1
 		dataType: string
