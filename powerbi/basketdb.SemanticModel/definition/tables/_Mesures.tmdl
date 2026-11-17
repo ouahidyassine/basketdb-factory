@@ -36,8 +36,10 @@ table _Mesures
 		lineageTag: fce9888c-aba5-4a02-9ad8-7264a9b57b5f
 
 	measure 'Avantage du terrain' = [Taux de victoire à domicile] - [Taux de victoire à l'extérieur]
-		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 046ff05a-1d28-4882-a7c6-9e3ef9cfde70
+		dataCategory: Uncategorized
+
+		formatStringDefinition = "+0.0"" pts"";-0.0"" pts"";0.0"" pts"""
 
 	measure 'Taux de victoire en back-to-back' =
 			
@@ -98,6 +100,155 @@ table _Mesures
 		lineageTag: 28aa2625-0c79-49db-88d6-b35edc3cdf63
 
 		formatStringDefinition = "+0.0;-0.0;0.0"
+
+	measure 'Taux du facteur' =
+			
+			SWITCH (
+			    SELECTEDVALUE ( Facteurs[Facteur] ),
+			    "Meilleure forme que l'adversaire", [Taux de victoire en meilleure forme],
+			    "À domicile", [Taux de victoire à domicile],
+			    "Plus de repos que l'adversaire", [Taux de victoire avec plus de repos],
+			    "Hors back-to-back", [Taux de victoire hors back-to-back],
+			    "Moins de repos que l'adversaire", [Taux de victoire avec moins de repos],
+			    "En back-to-back", [Taux de victoire en back-to-back],
+			    "À l'extérieur", [Taux de victoire à l'extérieur]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 6e1fe555-6b7c-474b-9caa-04a19bffa3b4
+
+	measure 'Avantage du terrain (pts)' = [Avantage du terrain] * 100
+		lineageTag: 3b368b38-74fe-400b-a630-238620378331
+
+		formatStringDefinition = "+0.0"" pts"";-0.0"" pts"";0.0"" pts"""
+
+	measure 'Saisons analysées' = DISTINCTCOUNT ( fact_team_game[season] )
+		formatString: 0
+		lineageTag: 3c786bb7-3507-4b99-9bd4-2d51b7dc3190
+
+	measure 'Meilleur taux à domicile' =
+			
+			MAXX ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: b2715c13-b1e1-464f-bf75-b9d7f588899f
+
+	measure 'Meilleure saison à domicile' =
+			
+			VAR meilleur = [Meilleur taux à domicile]
+			RETURN
+			    "Saison "
+			        & CONCATENATEX (
+			            FILTER ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] = meilleur ),
+			            dim_season[season],
+			            ", "
+			        )
+		lineageTag: 70e6f059-bd1d-4823-974b-e24e57fcf42b
+
+	measure 'Plus faible taux à domicile' =
+			
+			MINX ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 0bffc053-76ce-42ad-a599-b01f3f4cd02a
+
+	measure 'Saison la plus faible à domicile' =
+			
+			VAR plus_faible = [Plus faible taux à domicile]
+			RETURN
+			    "Saison "
+			        & CONCATENATEX (
+			            FILTER ( VALUES ( dim_season[season] ), [Taux de victoire à domicile] = plus_faible ),
+			            dim_season[season],
+			            ", "
+			        )
+		lineageTag: deaef933-c081-4dd9-a1ab-5b6f3ea54410
+
+	measure 'Taux de victoire (carte de chaleur)' =
+			
+			IF ( [Matchs (équipe)] > 0, COALESCE ( [Taux de victoire], 0 ) )
+		formatString: 0%;-0%;0%
+		lineageTag: 29825398-478d-4879-8a63-7d9a4db74220
+
+	measure 'Écart forme vs 50 %' = ( [Taux de victoire en meilleure forme] - 0.5 ) * 100
+		lineageTag: d11743ae-ef0b-41fb-a9b9-0f80e48b1849
+
+		formatStringDefinition = "+0.0"" pts"";-0.0"" pts"";0.0"" pts"""
+
+	measure 'Taux en back-to-back à l''extérieur' =
+			
+			CALCULATE (
+			    [Taux de victoire],
+			    fact_team_game[is_back_to_back] = TRUE (),
+			    fact_team_game[venue] = "Extérieur"
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 220a4077-ea6e-4e8b-8f64-f4745f8a5ade
+
+	measure 'Matchs en back-to-back à l''extérieur' =
+			
+			"sur "
+			    & FORMAT (
+			        CALCULATE (
+			            [Matchs (équipe)],
+			            fact_team_game[is_back_to_back] = TRUE (),
+			            fact_team_game[venue] = "Extérieur"
+			        ),
+			        "#,0"
+			    )
+			    & " matchs"
+		lineageTag: ade33ac4-cfff-4fca-9a74-bd3832b8def4
+
+	measure Bilan =
+			
+			VAR victoires = COALESCE ( [Victoires], 0 )
+			VAR defaites = COALESCE ( [Défaites], 0 )
+			RETURN
+			    IF (
+			        [Matchs (équipe)] > 0,
+			        FORMAT ( victoires, "#,0" ) & " – " & FORMAT ( defaites, "#,0" )
+			    )
+		lineageTag: 3e519bcb-570f-45fb-a9bc-fb835299a8cb
+
+	measure 'Plus large victoire' =
+			
+			CALCULATE (
+			    MAX ( fact_team_game[point_diff] ),
+			    fact_team_game[is_win] = TRUE ()
+			)
+		lineageTag: 727228ec-7f70-4091-b761-b9a1b0f53ba4
+
+		formatStringDefinition = "+0"" pts"""
+
+	measure 'Date de la plus large victoire' =
+			
+			VAR ecart = [Plus large victoire]
+			VAR jour =
+			    CALCULATE (
+			        MAX ( fact_team_game[game_date] ),
+			        fact_team_game[is_win] = TRUE (),
+			        fact_team_game[point_diff] = ecart
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( jour ), "le " & FORMAT ( jour, "dd/mm/yyyy" ) )
+		lineageTag: e485bfad-4bf5-4d35-8ec0-afeb96c74a50
+
+	measure 'Forme de l''équipe' =
+			
+			CALCULATE (
+			    AVERAGE ( fact_team_game[win_rate_last_10] ),
+			    fact_team_game[form_games] >= 5,
+			    NOT ISBLANK ( fact_team_game[opponent_win_rate_last_10] )
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: 304d0a2f-fbd0-436f-a4a9-b1c9f745ebc0
+
+	measure 'Forme de l''adversaire' =
+			
+			CALCULATE (
+			    AVERAGE ( fact_team_game[opponent_win_rate_last_10] ),
+			    fact_team_game[form_games] >= 5,
+			    NOT ISBLANK ( fact_team_game[opponent_win_rate_last_10] )
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: 09802610-2ee9-46c2-9f74-29942084e4b2
 
 	column Column1
 		dataType: string

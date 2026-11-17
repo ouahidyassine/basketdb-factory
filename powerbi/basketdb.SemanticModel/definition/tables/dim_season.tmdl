@@ -75,6 +75,14 @@ table dim_season
 
 		annotation SummarizationSetBy = Automatic
 
+	column season_short
+		dataType: string
+		lineageTag: 002f0ae1-d438-4c75-8009-8b2318bb4ae7
+		summarizeBy: none
+		sourceColumn: season_short
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_season = m
 		mode: import
 		source =

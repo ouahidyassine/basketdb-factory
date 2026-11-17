@@ -19,6 +19,7 @@ ref table dim_team
 ref table fact_team_game
 ref table _Mesures
 ref table dim_opponent
+ref table Facteurs
 
 ref cultureInfo en-US
 

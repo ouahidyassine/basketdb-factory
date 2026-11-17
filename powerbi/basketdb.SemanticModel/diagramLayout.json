@@ -82,6 +82,18 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1604.6221629171364,
+            "y": 374.81163707291273
+          },
+          "nodeIndex": "Facteurs",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

@@ -29,6 +29,7 @@ current_season as (
 
 select
     s.season,
+    substring(s.season from 3)    as season_short,
     left(s.season, 4)::int                         as start_year,
     s.first_game_date,
     s.last_game_date,

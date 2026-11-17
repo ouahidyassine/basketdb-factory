@@ -38,5 +38,3 @@ table dim_opponent
 				in
 				    gold_dim_opponent
 
-	changedProperty = Name
-

@@ -16,6 +16,9 @@ models:
       - name: is_complete
         description: Vrai si la saison régulière est terminée.
         data_tests: [not_null]
+      - name: season_short
+        description: Saison abrégée (15-16), pour les en-têtes étroits du rapport.
+        data_tests: [not_null]
 
   - name: dim_team
     description: Une ligne par équipe, avec son dernier nom et sa dernière abréviation connus.

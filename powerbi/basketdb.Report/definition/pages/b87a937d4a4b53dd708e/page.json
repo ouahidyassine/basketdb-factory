@@ -1,10 +1,73 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "b87a937d4a4b53dd708e",
-  "displayName": "Facteurs d'avant-match",
+  "displayName": "Facteurs",
   "displayOption": "FitToPage",
-  "height": 1440,
-  "width": 2560,
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d9132bce009106ae80da",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_season"
+              }
+            },
+            "Property": "is_complete"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "dim_season",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "is_complete"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "290f4e0406d007ead928",
+    "type": "Default",
+    "parameters": []
+  },
   "objects": {
     "background": [
       {
@@ -14,7 +77,7 @@
               "name": {
                 "expr": {
                   "Literal": {
-                    "Value": "'page.png'"
+                    "Value": "'facteurs.png'"
                   }
                 }
               },
@@ -23,14 +86,14 @@
                   "ResourcePackageItem": {
                     "PackageName": "RegisteredResources",
                     "PackageType": 1,
-                    "ItemName": "page07855424597408867.png"
+                    "ItemName": "facteurs6351084407242239.png"
                   }
                 }
               },
               "scaling": {
                 "expr": {
                   "Literal": {
-                    "Value": "'Normal'"
+                    "Value": "'Fill'"
                   }
                 }
               }
@@ -39,5 +102,107 @@
         }
       }
     ]
-  }
+  },
+  "visualInteractions": [
+    {
+      "source": "da7a55b75c10dca4d89e",
+      "target": "cde1b2c2b8e1ac3e4028",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03c40ed67ee6079b7bbb",
+      "target": "515edcaf1a0760277e9a",
+      "type": "DataFilter"
+    },
+    {
+      "source": "03c40ed67ee6079b7bbb",
+      "target": "da7a55b75c10dca4d89e",
+      "type": "DataFilter"
+    },
+    {
+      "source": "cde1b2c2b8e1ac3e4028",
+      "target": "515edcaf1a0760277e9a",
+      "type": "DataFilter"
+    },
+    {
+      "source": "cde1b2c2b8e1ac3e4028",
+      "target": "da7a55b75c10dca4d89e",
+      "type": "DataFilter"
+    },
+    {
+      "source": "da7a55b75c10dca4d89e",
+      "target": "515edcaf1a0760277e9a",
+      "type": "DataFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "8fbbbcc3115de851a1ea",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "22e142c1da0aeb23063d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "ad4f465110dd019aa800",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "a99d6137b5b74668b01b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "d0d75dd6292c2a007e1b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "0ff90b9d57995745d839",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "a47645d3c89c49a07700",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "3ea9979720090e4a142b",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "cde1b2c2b8e1ac3e4028",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "da7a55b75c10dca4d89e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "2d5070ca00215006ac05",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "03c40ed67ee6079b7bbb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "5040aaf1939a1d46d608",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f6ae9d9c5189d522530",
+      "target": "cac4fc4685826b808cb3",
+      "type": "NoFilter"
+    }
+  ]
 }

@@ -1,0 +1,42 @@
+table Facteurs
+	lineageTag: 45242677-c6e6-42a6-bf42-1234c183ad64
+
+	column Facteur
+		lineageTag: d12d1013-cae5-404d-8bbc-33854ce069f7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Facteur]
+		sortByColumn: Ordre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordre
+		isHidden
+		formatString: 0
+		lineageTag: e06f93d5-da23-45b9-b6fb-49a712f614dc
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ordre]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Facteurs = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Facteur", STRING,
+				    "Ordre", INTEGER,
+				    {
+				        { "Meilleure forme que l'adversaire", 1 },
+				        { "À domicile", 2 },
+				        { "Plus de repos que l'adversaire", 3 },
+				        { "Hors back-to-back", 4 },
+				        { "Moins de repos que l'adversaire", 5 },
+				        { "En back-to-back", 6 },
+				        { "À l'extérieur", 7 }
+				    }
+				)
+
+	annotation PBI_Id = 9a6a6f24f4f74d489ce55820ff760871
+
