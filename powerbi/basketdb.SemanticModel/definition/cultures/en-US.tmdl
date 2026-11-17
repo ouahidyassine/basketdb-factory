@@ -386,16 +386,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.476
 			          }
-			        },
-			        {
-			          "saison": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -3426,6 +3416,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.491
 			          }
+			        },
+			        {
+			          "Repos": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -3877,16 +3877,6 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.492
 			          }
-			        },
-			        {
-			          "Avantage du terrain (points)": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -3909,6 +3899,16 @@ cultureInfo en-US
 			            "State": "Generated",
 			            "Weight": 0.97
 			          }
+			        },
+			        {
+			          "En back-to-back": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -3930,6 +3930,16 @@ cultureInfo en-US
 			          "taux de victoire hors back to back": {
 			            "State": "Generated",
 			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "Hors back-to-back": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -3978,6 +3988,16 @@ cultureInfo en-US
 			        {
 			          "taux de victoire en meilleure forme": {
 			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Victoires en meilleure forme que l'adversaire": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -5214,6 +5234,105 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "entity__mesure.écart_forme_vs_50_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Écart forme vs 50 %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "écart forme vs 50 %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "écart forme vs 50 percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "écart forme vs 50 pct": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.757
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.taux_en_backtoback_à_lextérieur": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Taux en back-to-back à l'extérieur"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "taux en back-to-back à l'extérieur": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "taux en back to back à l'extérieur": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.matchs_en_backtoback_à_lextérieur": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "Matchs en back-to-back à l'extérieur"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "matchs en back-to-back à l'extérieur": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "matchs en back to back à l'extérieur": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "entity__mesure.entity__écart_forme_vs_50__FormatString": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Mesures",
+			          "ConceptualProperty": "_Écart forme vs 50 % FormatString"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "_écart forme vs 50 % FormatString": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
@@ -5260,6 +5379,105 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_seasons_have_fact_team_games"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_matchs_en_backtoback_à_lextérieur": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.matchs_en_backtoback_à_lextérieur": {
+			          "Target": {
+			            "Entity": "entity__mesure.matchs_en_backtoback_à_lextérieur"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.matchs_en_backtoback_à_lextérieur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_matchs_en_backtoback_à_lextérieur"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_taux_en_backtoback_à_lextérieur": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.taux_en_backtoback_à_lextérieur": {
+			          "Target": {
+			            "Entity": "entity__mesure.taux_en_backtoback_à_lextérieur"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.taux_en_backtoback_à_lextérieur"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_taux_en_backtoback_à_lextérieur"
+			        }
+			      ]
+			    },
+			    "fact_team_game_has_entity__mesure_écart_forme_vs_50_": {
+			      "Binding": {
+			        "ConceptualEntity": "fact_team_game"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fact_team_game": {
+			          "Target": {
+			            "Entity": "fact_team_game"
+			          }
+			        },
+			        "entity__mesure.écart_forme_vs_50_": {
+			          "Target": {
+			            "Entity": "entity__mesure.écart_forme_vs_50_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fact_team_game"
+			            },
+			            "Object": {
+			              "Role": "entity__mesure.écart_forme_vs_50_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fact_team_games_have_écart_forme_vs_50_"
 			        }
 			      ]
 			    },

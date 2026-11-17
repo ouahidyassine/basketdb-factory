@@ -59,25 +59,27 @@ Deux sources, selon l'état de la page :
 | clusteredBarChart | team_name ; Taux de victoire | 32 | 428 | 560 | 268 |
 | lineChart | season_short ; À domicile ; À l'extérieur | 640 | 500 | 608 | 196 |
 
-### Facteurs d'avant-match
+### Facteurs
 
-| Zone | Visuel | Champs | x | y | Largeur | Hauteur |
-|---|---|---|---|---|---|---|
-| segment_1 | Slicer (Dropdown) | dim_season[season] | 472 | 42 | 120 | 32 |
-| segment_2 | Slicer (Dropdown) | dim_team[team_name] | 624 | 42 | 120 | 32 |
-| segment_3 | Slicer (Dropdown) | fact_team_game[venue] | 776 | 42 | 120 | 32 |
-| navigation | Page navigator | Pages visibles du rapport | 924 | 28 | 336 | 40 |
-| principal | Card (new) | [Taux de victoire en meilleure forme] | 32 | 152 | 272 | 104 |
-| mini_1 | Card (new) | [Taux de victoire à domicile] | 76 | 270 | 80 | 44 |
-| mini_2 | Card (new) | [Taux de victoire avec plus de repos] | 220 | 270 | 80 | 44 |
-| mini_3 | Card (new) | [Taux de victoire en back-to-back] | 364 | 270 | 80 | 44 |
-| mini_4 | Card (new) | [Taux de victoire à l'extérieur] | 508 | 270 | 80 | 44 |
-| kpi | Card (new) | [Écart forme vs 50 %] | 640 | 148 | 272 | 60 |
-| a_la_une | Card (new) | [Taux en back-to-back à l'extérieur] | 960 | 148 | 168 | 60 |
-| chaleur | Matrix | Lignes rest_bucket ; colonnes venue ; [Taux de victoire] | 640 | 284 | 320 | 140 |
-| anneau | Donut chart | Légende result ; [Matchs (équipe)] ; filtre is_back_to_back = True | 1056 | 284 | 192 | 140 |
-| barres | Clustered bar chart | Facteurs[Facteur] ; [Taux du facteur] | 32 | 428 | 560 | 268 |
-| courbes | Line chart | season ; [Taux de victoire en back-to-back], [Taux de victoire hors back-to-back] | 640 | 500 | 608 | 196 |
+| Visuel | Champs | x | y | Largeur | Hauteur |
+|---|---|---|---|---|---|
+| pageNavigator | — | 924 | 26 | 336 | 40 |
+| slicer | venue | 776 | 41 | 120 | 32 |
+| slicer | season | 472 | 42 | 120 | 32 |
+| slicer | team_name | 624 | 42 | 120 | 32 |
+| cardVisual | Écart forme vs 50 % | 650 | 136 | 272 | 60 |
+| cardVisual | Taux en back-to-back à l'extérieur | 976 | 136 | 272 | 60 |
+| cardVisual | Victoires en meilleure forme que l'adversaire | 32 | 142 | 272 | 104 |
+| cardVisual | Matchs en back-to-back à l'extérieur | 976 | 184 | 272 | 22 |
+| donutChart | result ; Matchs (équipe) | 1024 | 254 | 240 | 192 |
+| cardVisual | Taux de victoire à domicile | 76 | 270 | 80 | 44 |
+| cardVisual | Taux de victoire avec plus de repos | 220 | 270 | 80 | 44 |
+| cardVisual | Taux de victoire en back-to-back | 364 | 270 | 80 | 44 |
+| cardVisual | Taux de victoire à l'extérieur | 502 | 270 | 80 | 44 |
+| pivotTable | venue ; Repos ; Taux de victoire | 624 | 272 | 352 | 160 |
+| cardVisual | En back-to-back | 1064 | 300 | 160 | 96 |
+| clusteredBarChart | Facteur ; Taux du facteur | 32 | 428 | 560 | 268 |
+| lineChart | season_short ; En back-to-back ; Hors back-to-back | 640 | 500 | 608 | 196 |
 
 ### Face-à-face
 

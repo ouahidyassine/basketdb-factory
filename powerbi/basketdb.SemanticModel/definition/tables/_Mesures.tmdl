@@ -113,9 +113,8 @@ table _Mesures
 			    "En back-to-back", [Taux de victoire en back-to-back],
 			    "À l'extérieur", [Taux de victoire à l'extérieur]
 			)
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 6e1fe555-6b7c-474b-9caa-04a19bffa3b4
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Avantage du terrain (pts)' = [Avantage du terrain] * 100
 		lineageTag: 3b368b38-74fe-400b-a630-238620378331
@@ -165,6 +164,35 @@ table _Mesures
 	measure 'Taux de victoire (carte de chaleur)' = [Taux de victoire]
 		formatString: 0%;-0%;0%
 		lineageTag: 29825398-478d-4879-8a63-7d9a4db74220
+
+	measure 'Écart forme vs 50 %' = ( [Taux de victoire en meilleure forme] - 0.5 ) * 100
+		lineageTag: d11743ae-ef0b-41fb-a9b9-0f80e48b1849
+
+		formatStringDefinition = "+0.0"" pts"";-0.0"" pts"";0.0"" pts"""
+
+	measure 'Taux en back-to-back à l''extérieur' =
+			
+			CALCULATE (
+			    [Taux de victoire],
+			    fact_team_game[is_back_to_back] = TRUE (),
+			    fact_team_game[venue] = "Extérieur"
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 220a4077-ea6e-4e8b-8f64-f4745f8a5ade
+
+	measure 'Matchs en back-to-back à l''extérieur' =
+			
+			"sur "
+			    & FORMAT (
+			        CALCULATE (
+			            [Matchs (équipe)],
+			            fact_team_game[is_back_to_back] = TRUE (),
+			            fact_team_game[venue] = "Extérieur"
+			        ),
+			        "#,0"
+			    )
+			    & " matchs"
+		lineageTag: ade33ac4-cfff-4fca-9a74-bd3832b8def4
 
 	column Column1
 		dataType: string
