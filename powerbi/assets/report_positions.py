@@ -48,7 +48,7 @@ def find_page(pages_dir: Path, display_name: str) -> Path:
     return names[display_name]
 
 
-def _fields(visual: dict[str, Any]) -> tuple[str, ...]:
+def visual_fields(visual: dict[str, Any]) -> tuple[str, ...]:
     """Champs projetés par le visuel, dans l'ordre de ses zones (axes, valeurs…)."""
     query_state = visual.get("visual", {}).get("query", {}).get("queryState", {})
     fields: list[str] = []
@@ -72,7 +72,7 @@ def read_positions(page_dir: Path) -> list[VisualPosition]:
         positions.append(
             VisualPosition(
                 visual_type=visual.get("visual", {}).get("visualType", "inconnu"),
-                fields=_fields(visual),
+                fields=visual_fields(visual),
                 x=round(box["x"]),
                 y=round(box["y"]),
                 width=round(box["width"]),
